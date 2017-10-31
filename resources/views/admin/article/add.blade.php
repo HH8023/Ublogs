@@ -8,9 +8,13 @@
             <div class="widget-function am-fr">
                 <a href="javascript:;" class="am-icon-cog"></a>
             </div>
-        </div>
+        </div>           
+            @if(session('msg'))
+                {{session('msg')}}
+            @endif
+       
         <div class="widget-body am-fr">
-            <form action="{{ url('admin/article/') }}" method='post' class="am-form tpl-form-border-form" >
+            <form id="art_form" action="{{ url('admin/article/') }}" method='post' class="am-form tpl-form-border-form"  enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="am-form-group">
                     <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">标题 <span class="tpl-form-line-small-title">Title</span></label>
@@ -19,11 +23,11 @@
                         <small>请填写标题文字10-20字左右。</small>
                     </div>
                 </div>
-
+                
                 <div class="am-form-group">
                     <label for="user-email" class="am-u-sm-12 am-form-label am-text-left">发布时间 <span class="tpl-form-line-small-title">Time</span></label>
                     <div class="am-u-sm-12">
-                        <input type="text" name="add_time" class="am-form-field tpl-form-no-bg am-margin-top-xs" placeholder="发布时间" data-am-datepicker="" readonly="">
+                        <input type="text" name="add_time" class="am-form-field tpl-form-no-bg am-margin-top-xs" value="{{date('Y-m-d H:i:s')}}" >
                         <small>发布时间为必填</small>
                     </div>
                 </div>
@@ -53,11 +57,18 @@
                     <div class="am-u-sm-12 am-margin-top-xs">
                         <div class="am-form-group am-form-file">
                             <div class="tpl-form-file-img">
-                                <img src="assets/img/a5.png" alt="">
+
+                    
+                    <!--   <input id="file_upload" name="file_upload" type="file" multiple="true">
+                   
+                         -->
+                                <input type="text" size="50" name="art_thumb" id="art_thumb">
+                                <img id="img1" alt="上传后显示图片" style="max-width:350px;max-height:100px;">
+                                
                             </div>
                             <button type="button" class="am-btn am-btn-danger am-btn-sm ">
                                    <i class="am-icon-cloud-upload"></i> 添加封面图片</button>
-                            <input id="doc-form-file" type="file" multiple="">
+                            <input id="file_upload" name="file_upload" type="file" multiple="true">
                         </div>
                     </div>
                 </div>
@@ -90,5 +101,42 @@
         </div>
     </div>
 </div>
-
+<script>
+        $(function () {
+            $("#file_upload").change(function () {
+                uploadImage();
+            })
+        })
+        function uploadImage() {
+        //  判断是否有选择上传文件
+            var imgPath = $("#file_upload").val();
+            if (imgPath == "") {
+                alert("请选择上传图片！");
+                return;
+            }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+            if (strExtension != 'jpg' && strExtension != 'gif'
+                && strExtension != 'png' && strExtension != 'bmp') {
+                alert("请选择图片文件");
+                return;
+            }
+            var formData = new FormData($('#art_form')[0]);
+            $.ajax({
+                type: "POST",
+                url: "/admin/upload",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    // $('#img1').attr('src','http://lamp189.oss-cn-shanghai.aliyuncs.com/'+data);
+                   $('#img1').attr('src','/'+data);
+                    $('#art_thumb').val(data);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("上传失败，请检查网络后重试");
+                }
+            });
+        }
+    </script>
 @endsection

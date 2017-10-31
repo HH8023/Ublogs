@@ -1,4 +1,4 @@
-﻿@extends('admin.public.parent')
+@extends('admin.public.parent')
 
 @section('content')
 
@@ -24,7 +24,7 @@
                                 <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
                                     <div class="am-form-group tpl-table-list-select">
                                         <select data-am-selected="{btnSize: 'sm'}">
-                                          <option value="option1">所有类别</option>
+                                          <option value="option1">栏目名</option>
                                           <option value="option2">IT业界</option>
                                           <option value="option3">数码产品</option>
                                           <option value="option3">笔记本电脑</option>
@@ -35,12 +35,14 @@
                                     </div>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                <form action="{{ url('admin/article') }}">
                                     <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                                        <input type="text" class="am-form-field ">
+                                        <input type="text" class="am-form-field " name="name">
                                         <span class="am-input-group-btn">
-                                            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="button"></button>
+                                            <input  class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="submit" >
                                         </span>
                                     </div>
+                                </form>
                                 </div>
                             <form action="#" method='post'>
                                 <div class="am-u-sm-12">
@@ -69,9 +71,9 @@
                                                         <a href="javascript:" onclick="doDel({{ $a->id }})" class="tpl-table-black-operation-del">
                                                             <i class="am-icon-trash"></i> 删除
                                                         </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                       <!--  <a href="javascript:;" class="tpl-table-black-operation-del">
                                                             <i class="am-icon-asterisk"></i> 审核
-                                                        </a>                                                        
+                                                        </a> -->                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -81,19 +83,10 @@
                                     </table>
                                 </div>
                             </form>
-                                 {!! $title->render() !!}
+                                 
                                 <div class="am-u-lg-12 am-cf">
                                     <div class="am-fr">
-                                        <ul class="am-pagination tpl-pagination">
-                                            <li class="am-disabled"><a href="#">«</a></li>
-                                            <li class="am-active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">»</a></li>
-                                        
-                                        </ul>
+                                       {!! $title->render() !!}
                                     </div>
                                 </div>
                             </div>
@@ -106,33 +99,17 @@
 
 @endsection
 <script>
-    // function doDel(id)
-    // {
-    //     if(confirm('你确定要删除吗？')){
-    //         var form = document.myform;
-    //         form.action = 'article/'+id;
-    //         form.submit();
-    //     }
-        
-    // }
-
-
-
-
 function doDel(id){
 
     //询问框
     layer.confirm('确认删除？', {
         btn: ['确认','取消'] //按钮
     }, function(){
-//                通过ajax 向服务器发送一个删除请求
-    
+//                通过ajax 向服务器发送一个删除请求 
 //                $.post('请求的路径'，携带的数据参数，执行后返回的数据)
-//                {'key':'value','key1':'value1'}
         $.post("{{url('admin/article/')}}/"+id,{'_method':'delete','_token':"{{csrf_token()}}"},function(data){
-//                    需要将json字符串变成json对象
+//需要将json字符串变成json对象
             //var data = JSON.parse(data);
-
 //                    JSON.parse(jsonstr); //可以将json字符串转换成json对象
 //                    JSON.stringify(jsonobj); //可以将json对象转换成json对符串
 

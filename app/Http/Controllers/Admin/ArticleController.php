@@ -9,9 +9,44 @@ use App\Http\Models\Artcal_list;
 use App\Http\Models\Artcal_detail;
 class ArticleController extends Controller
 {
+
+     //文件上传方法
+    public function upLoad(Request $request)
+    {
+        //思路
+        //1 接收上传的文件
+        //2 将上传文件移动到指定位置
+        //3 将处理结果返回给客户端浏览器（文件在服务器上保存的路径）
+                //实现获取上传的文件对象
+        $file = input::file('file_upload');
+
+        //判断文件是否有效
+        if($file->isValid()) {
+            $entension = $file->getClientOriginalExtension();//上传文件的后缀名
+            $newName = date('YmdHis') . mt_rand(1000, 9999) . '.' . $entension;
+            // 1将文件上传到本地服务器
+            $path = $file->move(public_path().'/uploads',$newName);
+
+
+            // 2  将文件上传到OSS
+            // $pic = $file->getRealPath();
+            // //            阿里OSS上传
+            // OSS::upload('uploads/' . $newName, $pic);
+
+
+//                    3 上传到七牛云服务器
+            //\Storage::disk('qiniu')->writeStream('uploads/'.$newName, fopen($file->getRealPath(), 'r'));
+           // $filepath = 'uploads/' . $newName;
+            //返回文件的路径
+            return $path;
+        }
+    }
+
+
+
     /**
      * 图文列表
-     *
+     *搜索分页 没写
      * @return \Illuminate\Http\Response
      */
 
@@ -20,14 +55,30 @@ class ArticleController extends Controller
         return view('admin.article.plist');
     }
 
-    public function index()
+    public function index(Request $request)
     {   
-        //连接文章列表的模型
-        $title = Artcal_list::paginate(1);
-        //  $ad = $title->detail->content;
-        // dd($title);
 
-        return view('admin.article.index', ['title' => $title]);
+        //保存搜索的条件
+     // $where = []; 
+        // $ob = Artcal_list::get();
+        // // 判断是否搜索了name字段
+        // //dd($ob);
+        // if($request->has('name')){
+        //     // 获取用户搜索的Name字段的值
+        //     $name = $request->input('name');
+        //     $where['name'] = $name;
+        //     //给查询语句添加上where条件
+        //     $ob->where('name', 'like', '%'.$name.'%');
+        // }
+        // $title = $ob;
+
+        // $title = Artcal_list::paginate(15);
+
+        // return view('admin.article.index', ['title' => $title,'where'=>$where]);
+        $input = $request->input('name')?$request->input('name'):'';
+        $title = Artcal_list::orderBy('id','desc')->where('title','like','%'.$input.'%')->paginate(5);
+        return view('admin.article.index',compact('title','input'));
+
         
     }
 
@@ -71,10 +122,13 @@ class ArticleController extends Controller
         $title->content = $request->content;
         $title->save();
 
-        return view('admin.article.add');
-
-
-       
+        if($add){
+          //return '成功';
+          return redirect('admin/article');
+        }else{
+          //return '失败';
+          return redirect('admin/article/create')->with('msg','添加失败');
+        }       
     }
 
     /**
@@ -126,12 +180,13 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {   
-       //查询要删除的记录的模型
+        //查询要删除的记录的模型
         $title = Artcal_list::find($id);
-      
-        // $aid= Artcal_detail::find($id)
+        $re = Artcal_detail::where('art_id',$id)->delete();
+        //$title= Artcal_detail::find($id)
         //执行删除操作
         $re = $title->delete();
+
         //根据返回的结果处理成功和失败
         if($re){
           $data=[
@@ -144,8 +199,7 @@ class ArticleController extends Controller
                 'msg'=>'删除失败'
             ];
         }
-//        return json_encode($data);
-//        return response()->json($data);
+
         return  $data;
     }
 }

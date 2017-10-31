@@ -29,10 +29,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 	Route::post('user/add', 'UserController@add');
 
 
-	// 文章模块
+	//文章模块
 	Route::resource('article','ArticleController');
 	//图片列表页显示
 	Route::get('particle','ArticleController@plist');
+	//文件上传路由
+    Route::post('upload','ArticleController@upLoad');
 	//文章编辑页面
 	//Route::get('article/wzbj','ArticleController');
 
