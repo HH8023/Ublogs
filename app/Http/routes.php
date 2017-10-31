@@ -19,26 +19,23 @@ Route::get('admin/login', 'Admin\LoginController@index');
 Route::post('admin/doLogin', 'Admin\LoginController@doLogin');
 Route::get('admin/logout', 'Admin\LoginController@doLogout');
 
-// 后台路由群组                                     ,'middleware' => ['isLogin']
+// 后台路由群组 
 Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
-
-    // Route::get('/', function ()    {
-    //     // 使用 Auth 中间件
-    // });
-// 'middleware'=>'login'
-	// // 用户模块
- //    Route::get('user/profile', 'admin');
-
-
 
 	// 后台首页路由
 	Route::get('index','IndexController@index');
-	// Route::get('info','IndexController@info');
-
     // 用户模块
     Route::get('user', 'UserController@index');
-    Route::get('user/{id}', 'UserController@auth');
-	Route::post('user/add', 'UserController@add');
+    // 搜索路由
+    Route::get('user/index', 'UserController@index');
+    // 用户删除
+    Route::get('users', 'UserController@destroy');
+	// 用户编辑
+	// Route::get('', 'UserController@destroy');
+
+
+
+	// Route::post('user/add', 'UserController@add');
 
 
 	// 文章模块

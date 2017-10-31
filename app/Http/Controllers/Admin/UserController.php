@@ -16,11 +16,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $users = User::all();
-        // return view('admin.user.index',['users'=>$users]);
-        return view('admin.user.index');
+        $where = [];
+        $ob = DB::table('user_infos');
+        // dd($request->all());
+        if($request->has('tel')){
+            $tel = $request->input('tel');
+            $where['tel'] = $tel;
+            $ob->where('tel','like','%'.$tel.'%');
+        }
+        $list = $ob->paginate(1);
+        // dd($list);
+        return view('admin.user.index',['index'=>$list,'where'=>$where]);
     }
 
     /**
@@ -86,8 +94,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-       
+        $id = $request->all('id');
+        // dd($id);
+       $res = DB::table('user_infos')->where('id',$id)->delete();
+        dd($res);
+        if($res > 0){
+            return redirect('/admin/user');
+        }else{
+            return redirect('/admin/user')->with('msg','删除失败');
+        }
     }
 }
