@@ -31,9 +31,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
     // 用户删除
     Route::get('users', 'UserController@destroy');
 	// 用户编辑
-	// Route::get('', 'UserController@destroy');
-
-
+	Route::get('user/{id}/edit', 'UserController@edit');
+	// 用户编辑后提交
+	// Route::post('user','UserController@update');
 
 	// Route::post('user/add', 'UserController@add');
 
@@ -49,6 +49,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 	//栏目模块
 	Route::resource('subject','SubjectController');
 
+	//评论模块 
+	Route::resource('comment','CommentController');
 
 	//友情链接
 	Route::resource('links','LinksController');

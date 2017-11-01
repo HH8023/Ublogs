@@ -21,7 +21,7 @@
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" >
                                <!-- <a href="{{ url('admin/user/create') }}"><input type="submit" class="am-btn am-btn-default am-btn-success" value="用户列表"> </a> -->
-                               <a href="{{ url('admin/user') }}"><input type="submit" class="am-btn am-btn-default am-btn-success" value="用户列表"> </a>                                         
+                               <a href="{{ url('admin/comment/create') }}"><input type="submit" class="am-btn am-btn-default am-btn-success" value="新增评论"> </a>                                         
                             </div>
                         </div>
                     </div>
@@ -36,9 +36,9 @@
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                     </form>
-                    <form action="{{ url('/admin/user/index') }}">
+                    <form action="{{ url('/admin/comment') }}" method="get">
                         <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                            <input type="text" name="tel"  class="am-form-field" placeholder="请输入手机号搜索">
+                            <input type="text" name="uid"  class="am-form-field" placeholder="请输入用户名搜索">
                             <span class="am-input-group-btn">
                                 <input class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="submit" value="搜索">
                             </span>
@@ -48,36 +48,30 @@
                 <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>评论ID</th>
                             <th>用户ID</th>
-                            <th>昵称</th>
-                            <th>电话</th>
-                            <th>密码</th>
-                            <th>性别</th>
-                            <th>头像</th>
-                            <th>生日</th>
+                            <th>文章ID</th>
+                            <th>评论内容</th>
+                            <th>评论时间</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                     
-                        @foreach ($index as $user)
+                        @foreach ($index as $comment)
                         
                             <tr class="gradeX">
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->uid }}</td>
-                                <td>{{ $user->nickname }}</td>
-                                <td>{{ $user->tel }}</td>
-                                <td>{{ $user->password }}</td>
-                                <td>{{ ($user->sex==1)?'男':'女' }}</td>
-                                <td>{{ $user->photo }}</td>
-                                <td>{{ $user->birthday }}</td>
+                                <td>{{ $comment->cid }}</td>
+                                <td>{{ $comment->uid }}</td>
+                                <td>{{ $comment->aid }}</td>
+                                <td>{{ $comment->c_content }}</td>
+                                <td>{{ $comment->c_time }}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
-                                        <a href="{{ url('admin/user/'.$user->id.'/edit/') }}">
-                                            <i class="am-icon-pencil"></i> 查看
+                                        <a href="{{ url('admin/comment/'.$comment->cid.'/edit/') }}">
+                                            <i class="am-icon-pencil"></i> 修改
                                         </a>
-                                        <a href="javascript:doDeluser({{ $user->id }});" class="tpl-table-black-operation-del">
+                                        <a href="javascript:doDelcomment({{ $comment->cid }});" class="tpl-table-black-operation-del">
                                             <i class="am-icon-trash"></i> 删除
                                         </a>
                                     </div>
@@ -93,16 +87,22 @@
         </div>
     </div>
     <script type="text/javascript">
-        function doDeluser(id)
+        function doDelcomment(cid)
         {
             if(confirm('你确定要删除吗？')){
-                $.get("{{ url('admin/users/')}}",{'id':id},function(data){
-                    if (data) {
-                        window.location = '/admin/user';
-                    }
-                });
+                var form = document.myform;
+                form.action = 'comment/'+cid;
+                form.submit();
             }
         }
     </script>
+    <!-- if(confirm('你确定要删除吗？')){
+    $.get("{{ url('admin/users/')}}",{'id':id},function(data){
+        if (data) {
+            window.location = '/admin/user';
+        }
+    });
+} -->
+
 @endsection
 
