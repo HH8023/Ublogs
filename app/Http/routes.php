@@ -40,6 +40,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 
 	// 文章模块
 	Route::resource('article','ArticleController');
+
 	//图片列表页显示
 	Route::get('particle','ArticleController@plist');
 	//文章编辑页面
@@ -65,9 +66,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
     Route::get('putfile','ConfigController@putFile');
 
 
+  //广告管理
+	Route::resource('advert','AdvertisingController');
+	
+
 });
-
-
 
 
 // 前台路由群组
@@ -78,9 +81,12 @@ Route::get('/cate/{id}','Home\IndexController@cate');
 Route::get('/a/{id}','Home\IndexController@article');
 
 
+// 前台群组路由   @张彦写的
+Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
+
+//详情
+Route::get('datails','DatailsController@index');
 
 
-
-
-
+});
 

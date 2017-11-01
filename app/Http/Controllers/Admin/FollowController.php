@@ -1,38 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-
 use DB;
-
-
-class UserController extends Controller
+class FollowController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function index(Request $request)
+    public function follow()
     {
-        $where = [];
-        $ob = DB::table('user_infos');
-        // dd($request->all());
-        if($request->has('tel')){
-            $tel = $request->input('tel');
-            $where['tel'] = $tel;
-            $ob->where('tel','like','%'.$tel.'%');
-        }
-        $list = $ob->paginate(1);
-        // dd($list);
-        return view('admin.user.index',['index' =>$list,'where'=>$where]);
-
+        // echo 1333111111111;
+           
+        $ob = DB::table('follow');
+       
+  
+       
+        //分页显示几条
+         $list = $ob->paginate(1);
+       
+        //显示页面
+        
+        return view('admin.follow',['follow'=>$list]);
     }
 
     /**
@@ -43,7 +38,6 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('admin.user.add');
     }
 
     /**
@@ -54,7 +48,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
@@ -66,7 +60,6 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        echo 33333;
     }
 
     /**
@@ -77,11 +70,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // echo 12345678765432;
-        $user = DB::table('user_infos')->where('id',$id)->first();
-        // dd($user);
-        return view('admin.user.edit',['user'=>$user]);
-        // return view('admin.user.edit');
+        //
     }
 
     /**
@@ -93,10 +82,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo 678909876;
-        // $data = $request->except('_token','_method');
-        // $res = DB::table('user_infos')->where('id',$id)->update($data);
-        // return redirect('/users');
+        //
     }
 
     /**
@@ -105,16 +91,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id = $request->all('id');
-        // dd($id);
-       $res = DB::table('user_infos')->where('id',$id)->delete();
-        dd($res);
-        if($res > 0){
-            return redirect('/admin/user');
-        }else{
-            return redirect('/admin/user')->with('msg','删除失败');
-        }
+        //
     }
 }
