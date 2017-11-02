@@ -82,7 +82,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="width-limit">
     <!-- 左上方 Logo -->
-    <a class="logo" href="/"><img src="picture/logo-58fd04f6f0de908401aa561cda6a0688_5.png" alt="Logo" /></a>
+    <a class="logo" href="{{ url('home/index') }}"><img src="picture/" alt="Ublog" /></a>
 
     <!-- 右上角 -->
       <!-- 未登录显示登录/注册/写文章 -->
@@ -260,11 +260,11 @@
     <div class="col-xs-7 col-xs-offset-1 aside">
       <div class="board">
           <a target="_blank" href="/recommendations/notes?category_id=56&amp;utm_medium=index-banner-s&amp;utm_source=desktop">
-            <img src="picture/banner-s-1-b8ff9ec59f72ea88ecc8c42956f41f78_1.png" alt="Banner s 1" />
-</a>        <a target="_blank" href="/trending/weekly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/banner-s-3-7123fd94750759acf7eca05b871e9d17_1.png" alt="Banner s 3" /></a>
-        <a target="_blank" href="/trending/monthly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/banner-s-4-b70da70d679593510ac93a172dfbaeaa_1.png" alt="Banner s 4" /></a>
-        <a utm_medium="index-banner-s" target="_blank" href="/publications"><img src="picture/banner-s-5-291e00e9156f30791fe24e3de9c39171_1.png" alt="Banner s 5" /></a>
-        <a target="_blank" href="/c/e048f1a72e3d?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/banner-s-6-c4d6335bfd688f2ca1115b42b04c28a7_1.png" alt="Banner s 6" /></a>
+            <img src="picture/" alt="Banner s 1" />
+</a>        <a target="_blank" href="/trending/weekly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/" alt="Banner s 3" /></a>
+        <a target="_blank" href="/trending/monthly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/" alt="Banner s 4" /></a>
+        <a utm_medium="index-banner-s" target="_blank" href="/publications"><img src="picture/" alt="Banner s 5" /></a>
+        <a target="_blank" href="/c/e048f1a72e3d?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/" alt="Banner s 6" /></a>
       </div>
 
       <!-- 首页右侧 App 下载提示 -->
