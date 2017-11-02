@@ -19,7 +19,7 @@ class RecController extends Controller
     {
         //保存搜索的条件
         $where = [];
-        $ob = DB::table('artical_list')->where('status',0);
+        $ob = DB::table('artical_list')->where('status',1);
 //        dd($ob->get());
         // 判断是否搜索了name字段
         if($request->has('name')){
@@ -75,18 +75,20 @@ class RecController extends Controller
 //        dd($res);
         if ($res->status == 1) {
             $res->status = 0;
+            //dd($res);
+            $res = $res->status;
+            $res = DB::table('artical_list')->where('id', $id)->update(['status'=>$res]);
+    //       dd($res);
+            return redirect('admin/recovery');
         } else {
             $res->status = 1;
+            //dd($res);
+            $res = $res->status;
+            $res = DB::table('artical_list')->where('id', $id)->update(['status'=>$res]);
+//          dd($res);
+            return redirect('admin/article');
         }
-        //dd($res);
-        $res = $res->status;
-        $res = DB::table('artical_list')->where('id', $id)->update(['status'=>$res]);
-//        dd($res);
-        if($res){
-            return redirect('admin/recovery');
-        }else{
-            return redirect('admin/artical_list');
-        }
+      
     }
 
     /**

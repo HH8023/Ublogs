@@ -61,7 +61,7 @@ class ArticleController extends Controller
 
         // return view('admin.article.index', ['title' => $title,'where'=>$where]);
         $input = $request->input('name')?$request->input('name'):'';
-        $title = Artcal_list::orderBy('id','desc')->where('status',1)->where('title','like','%'.$input.'%')->paginate(5);
+        $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->paginate(5);
         return view('admin.article.index',compact('title','input'));
 
         
@@ -73,9 +73,10 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //$title =DB::table('artical_list')->get();
-        return view('admin.article.add');
+    {   
+        $pro = Subject::get();
+       
+        return view('admin.article.add',['pro' => $pro]);
     }
 
     /**
@@ -91,12 +92,12 @@ class ArticleController extends Controller
         $add = new Artcal_list;
         $title = new Artcal_detail;
         //栏目名字
-        $pro = Subject::get();
-        // $pro = $add->subject();
-        return view('admin.article.add',['pro' => $pro]);
+        // $pro = Subject::get();
+        // // $pro = $add->subject();
+        // return view('admin.article.add',['pro' => $pro]);
         
          // $pr=$pro->list->pro_id;
-        dd($pro);
+        // dd($pro);
         // 文章list表添加内容
         $add->title = $request->title;
         $add->user_id = $request->user_id;

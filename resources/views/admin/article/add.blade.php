@@ -10,7 +10,9 @@
             </div>
         </div>           
             @if(session('msg'))
+
                 {{session('msg')}}
+                
             @endif
        
         <div class="widget-body am-fr">
@@ -45,11 +47,11 @@
                  <div class="am-form-group">
                     <label for="user-phone" class="am-u-sm-12 am-form-label am-text-left">添加分类 <span class="tpl-form-line-small-title">add category</span></label>
                     <div class="am-u-sm-12  am-margin-top-xs">
-
-                        <select id="selectId" name="name" data-am-selected="{searchBox: 1}" style="display: none;">
-                          <option value="1">栏目1</option>
-                          <option value="2">栏目2</option>
-                          <option value="3">栏目3</option>
+                     
+                        <select id="pro_id" name="pro_id" data-am-selected="{searchBox: 1}" style="display: none;">
+                        @foreach ($pro as $a)
+                        <option value="{{ $a->id}}">{{ $a->name}}</option>
+                        @endforeach
                         </select>
                    </div>
                 </div>
@@ -84,7 +86,7 @@
                         </script>
                     </div>
                 </div>
-                
+                <input type="hidden" name="status" value="1">
                 
 
                 <div class="am-form-group">
@@ -135,6 +137,6 @@
         });
 
     }
-    
+
 </script>
 @endsection
