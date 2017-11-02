@@ -12,16 +12,16 @@
 */
 
 Route::get('/', function () {
-
     return view('admin.index');
 });
+
 //后台登录
 Route::get('admin/login', 'Admin\LoginController@index');
 Route::post('admin/doLogin', 'Admin\LoginController@doLogin');
 Route::get('admin/logout', 'Admin\LoginController@doLogout');
 
-// 后台路由群组 
-Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
+// 后台路由群组
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']], function (){
 
 	// 后台首页路由
 	Route::get('index','IndexController@index');
@@ -45,7 +45,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
     Route::post('upload','ArticleController@upLoad');
 	//文章编辑页面
 	//Route::get('article/wzbj','ArticleController');
-
+	
 	//栏目模块
 	Route::resource('subject','SubjectController');
 
@@ -67,6 +67,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 	Route::resource('advert','AdvertisingController');
 	
 });
+
+//前台登录
+Route::get('home/login','Home\LoginController@login');
+Route::get('home/register','Home\LoginController@register');
+Route::get('home/code','Home\LoginController@code');
+Route::post('home/doregister','Home\LoginController@doRegister');
+Route::post('home/dologin','Home\LoginController@doLogin');
 
 
 // 前台路由群组

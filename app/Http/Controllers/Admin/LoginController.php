@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use Illuminate\Support\Facades\DB;
- use DB;
+use DB;
 
 class LoginController extends Controller
 {
@@ -19,7 +19,6 @@ class LoginController extends Controller
     public function doLogin(Request $request)
     {
     	$req = $request->all();
-        // dd($req);
 
     	$admin = DB::table('admin')->where('aname', $req['aname'])->first();
     	 // 查到了就是个对象，没查到就是null
@@ -46,5 +45,4 @@ class LoginController extends Controller
     	$request->session()->pull('admin');
     	return redirect('admin/login');
     }
-    
 }

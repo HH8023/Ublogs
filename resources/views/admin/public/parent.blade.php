@@ -322,7 +322,7 @@
                     </a>
                 </li> -->
                 <li class="sidebar-nav-link">
-                    <a href="login.html">
+                    <a href="{{ url('admin/login') }}">
                         <i class="am-icon-key sidebar-nav-link-logo"></i> 登录
                     </a>
                 </li>
@@ -338,7 +338,6 @@
 
         <!-- 内容区域 -->
         <div class="tpl-content-wrapper">
-
             <div class="row-content am-cf">
             <!-- 中间部分是子页面 -->
                 @yield('content')
@@ -350,19 +349,8 @@
     <script src="{{ asset('admin/assets/js/amazeui.datatables.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/app.js') }}"></script>
-    <script type="text/javascript">
-            function doDelsubject(id)
-                {
-                    if(confirm('你确定要删除吗？')){
-                        
-                        var form = document.myform;
-                        form.action = 'subject/'+id;
-                        form.submit();
-                    }
-                }
-    </script>
-</body>
 
+</body>
 </html>
 
 

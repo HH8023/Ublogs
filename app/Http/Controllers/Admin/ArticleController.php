@@ -65,7 +65,6 @@ class ArticleController extends Controller
         $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->paginate(5);
         return view('admin.article.index',compact('title','input'));
 
-        
     }
 
     /**
