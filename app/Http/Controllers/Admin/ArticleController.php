@@ -7,42 +7,27 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Artcal_list;
 use App\Http\Models\Artcal_detail;
+use App\Http\Models\Subject;
+use Illuminate\Support\Facades\Input;
+
 class ArticleController extends Controller
 {
 
      //文件上传方法
     public function upLoad(Request $request)
     {
-        //思路
-        //1 接收上传的文件
-        //2 将上传文件移动到指定位置
-        //3 将处理结果返回给客户端浏览器（文件在服务器上保存的路径）
-                //实现获取上传的文件对象
-        $file = input::file('file_upload');
-
+        //获取上传的文件对象
+        $file = Input::file('file_upload');
         //判断文件是否有效
-        if($file->isValid()) {
+        if($file->isValid()){
             $entension = $file->getClientOriginalExtension();//上传文件的后缀名
-            $newName = date('YmdHis') . mt_rand(1000, 9999) . '.' . $entension;
-            // 1将文件上传到本地服务器
+            $newName = date('YmdHis').mt_rand(1000,9999).'.'.$entension;
             $path = $file->move(public_path().'/uploads',$newName);
-
-
-            // 2  将文件上传到OSS
-            // $pic = $file->getRealPath();
-            // //            阿里OSS上传
-            // OSS::upload('uploads/' . $newName, $pic);
-
-
-//                    3 上传到七牛云服务器
-            //\Storage::disk('qiniu')->writeStream('uploads/'.$newName, fopen($file->getRealPath(), 'r'));
-           // $filepath = 'uploads/' . $newName;
+            $filepath = 'uploads/'.$newName;
             //返回文件的路径
-            return $path;
+            return  $filepath;
         }
     }
-
-
 
     /**
      * 图文列表
@@ -59,7 +44,7 @@ class ArticleController extends Controller
     {   
 
         //保存搜索的条件
-     // $where = []; 
+        // $where = []; 
         // $ob = Artcal_list::get();
         // // 判断是否搜索了name字段
         // //dd($ob);
@@ -76,7 +61,7 @@ class ArticleController extends Controller
 
         // return view('admin.article.index', ['title' => $title,'where'=>$where]);
         $input = $request->input('name')?$request->input('name'):'';
-        $title = Artcal_list::orderBy('id','desc')->where('title','like','%'.$input.'%')->paginate(5);
+        $title = Artcal_list::orderBy('id','desc')->where('status',1)->where('title','like','%'.$input.'%')->paginate(5);
         return view('admin.article.index',compact('title','input'));
 
         
@@ -105,13 +90,20 @@ class ArticleController extends Controller
         $add = $request->except('_token','query_string');
         $add = new Artcal_list;
         $title = new Artcal_detail;
+        //栏目名字
+        $pro = Subject::get();
+        // $pro = $add->subject();
+        return view('admin.article.add',['pro' => $pro]);
         
-       
+         // $pr=$pro->list->pro_id;
+        dd($pro);
         // 文章list表添加内容
         $add->title = $request->title;
         $add->user_id = $request->user_id;
         $add->pro_id = $request->pro_id;
+
         $add->add_time = $request->add_time;
+        $add->photo =$request->photo;
         
         //把主表的id赋给art_id
         $add->save();
@@ -123,11 +115,10 @@ class ArticleController extends Controller
         $title->save();
 
         if($add){
-          //return '成功';
-          return redirect('admin/article');
+            return redirect('admin/article');
         }else{
-          //return '失败';
-          return redirect('admin/article/create')->with('msg','添加失败');
+            //return '失败';
+            return redirect('admin/article/create')->with('msg','添加失败');
         }       
     }
 

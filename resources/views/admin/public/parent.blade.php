@@ -297,7 +297,7 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="chart.html">
+                    <a href="{{ url('admin/recovery') }}">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 回收站管理
 
                     </a>

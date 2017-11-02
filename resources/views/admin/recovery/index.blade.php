@@ -9,7 +9,7 @@
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                         <div class="widget am-cf">
                             <div class="widget-head am-cf">
-                                <div class="widget-title  am-cf">文章列表</div>
+                                <div class="widget-title  am-cf">回收站列表</div>
                             </div>
                             <div class="widget-body  am-fr">
                                 <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-                                <form action="{{ url('admin/article') }}">
+                                <form action="{{ url('admin/recovery') }}">
                                     <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
                                         <input type="text" class="am-form-field " name="name">
                                         <span class="am-input-group-btn">
@@ -69,11 +69,9 @@
                                                 <td>{{ $a->add_time }}</td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">
-                                                        <a href="{{ url('admin/article/'.$a->id) }}">
-                                                            <i class="am-icon-eye"></i> 查看
-                                                        </a>
+                                                        
                                                         <a href="{{ url('admin/recovery/'.$a->id) }}" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 放入回收站
+                                                            <i class="am-icon-trash"></i> 还原
                                                         </a>
                                                        <!--  <a href="javascript:;" class="tpl-table-black-operation-del">
                                                             <i class="am-icon-asterisk"></i> 审核

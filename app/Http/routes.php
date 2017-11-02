@@ -38,6 +38,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 	//文章编辑页面
 	//Route::get('article/wzbj','ArticleController');
 
+    // 回收站
+	Route::resource('recovery','RecController');
+
 
 
 
