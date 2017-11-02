@@ -14,6 +14,7 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <script src="{{ asset('admin/assets/js/echarts.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/jquery-1.10.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('layer/jquery.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/css/amazeui.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/css/amazeui.datatables.min.css') }}" />
@@ -203,7 +204,6 @@
 
             <!-- 菜单 -->
             <ul class="sidebar-nav">
-                <!-- <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li> -->
                 <li class="sidebar-nav-link">
                     <a href="{{ url('admin/index') }}" class="active">
                         <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
@@ -302,7 +302,7 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="chart.html">
+                    <a href="{{ url('admin/recovery') }}">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 回收站管理
 
                     </a>

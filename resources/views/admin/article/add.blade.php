@@ -8,9 +8,15 @@
             <div class="widget-function am-fr">
                 <a href="javascript:;" class="am-icon-cog"></a>
             </div>
-        </div>
+        </div>           
+            @if(session('msg'))
+
+                {{session('msg')}}
+                
+            @endif
+       
         <div class="widget-body am-fr">
-            <form action="{{ url('admin/article/') }}" method='post' class="am-form tpl-form-border-form" >
+            <form id="art_form" action="{{ url('admin/article') }}" method='post' class="am-form tpl-form-border-form"  enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="am-form-group">
                     <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">标题 <span class="tpl-form-line-small-title">Title</span></label>
@@ -19,11 +25,11 @@
                         <small>请填写标题文字10-20字左右。</small>
                     </div>
                 </div>
-
+                
                 <div class="am-form-group">
                     <label for="user-email" class="am-u-sm-12 am-form-label am-text-left">发布时间 <span class="tpl-form-line-small-title">Time</span></label>
                     <div class="am-u-sm-12">
-                        <input type="text" name="add_time" class="am-form-field tpl-form-no-bg am-margin-top-xs" placeholder="发布时间" data-am-datepicker="" readonly="">
+                        <input type="text" name="add_time" class="am-form-field tpl-form-no-bg am-margin-top-xs" value="{{date('Y-m-d H:i:s')}}" >
                         <small>发布时间为必填</small>
                     </div>
                 </div>
@@ -41,23 +47,25 @@
                  <div class="am-form-group">
                     <label for="user-phone" class="am-u-sm-12 am-form-label am-text-left">添加分类 <span class="tpl-form-line-small-title">add category</span></label>
                     <div class="am-u-sm-12  am-margin-top-xs">
-                        <select name="pro_id" data-am-selected="{searchBox: 1}" style="display: none;">
-                          <option value="1">栏目1</option>
-                          <option value="2">栏目2</option>
-                          <option value="3">栏目3</option>
+                     
+                        <select id="pro_id" name="pro_id" data-am-selected="{searchBox: 1}" style="display: none;">
+                        @foreach ($pro as $a)
+                        <option value="{{ $a->id}}">{{ $a->name}}</option>
+                        @endforeach
                         </select>
                    </div>
                 </div>
                <div class="am-form-group">
-                    <label for="user-weibo" class="am-u-sm-12 am-form-label  am-text-left">封面图 <span class="tpl-form-line-small-title">Images</span></label>
+                    <span for="user-weibo" class="am-u-sm-12 am-form-label  am-text-left">缩略图<span class="tpl-form-line-small-title">Images</span></span>
                     <div class="am-u-sm-12 am-margin-top-xs">
                         <div class="am-form-group am-form-file">
                             <div class="tpl-form-file-img">
-                                <img src="assets/img/a5.png" alt="">
+                                <input type="text"  name="photo" id="photo" style="width:25%">
+                                <img id="img1" alt="上传后显示图片" style="max-width:3450px;max-height:200px;">
                             </div>
-                            <button type="button" class="am-btn am-btn-danger am-btn-sm ">
-                                   <i class="am-icon-cloud-upload"></i> 添加封面图片</button>
-                            <input id="doc-form-file" type="file" multiple="">
+                                <input  id="file_upload" name="file_upload" type="file" multiple="true" >
+                                <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                <i class="am-icon-cloud-upload"></i>添加封面图片</button>
                         </div>
                     </div>
                 </div>
@@ -78,7 +86,7 @@
                         </script>
                     </div>
                 </div>
-                
+                <input type="hidden" name="status" value="1">
                 
 
                 <div class="am-form-group">
@@ -90,5 +98,45 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $("#file_upload").change(function () {
+            uploadImage();
+        })
+    })
+    function uploadImage() {
+    //  判断是否有选择上传文件
+        var imgPath = $("#file_upload").val();
+        if (imgPath == "") {
+            alert("请选择上传图片！");
+            return;
+        }
+        //判断上传文件的后缀名
+        var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+        if (strExtension != 'jpg' && strExtension != 'gif'
+            && strExtension != 'png' && strExtension != 'bmp') {
+            layer.alert("请选择图片文件");
+            return;
+        }
+        //创建FormData对象
+        var formData = new FormData($('#art_form')[0]);
+        $.ajax({
+            url:'/admin/upload', /*去过那个php文件*/
+            type:'POST',  /*提交方式*/
+            data:formData,
+            cache: false,
+            contentType: false,        /*不可缺*/
+            processData: false,         /*不可缺*/
+            success:function(data){      
+                $('#img1').attr('src','/'+data);
+                $('#photo').val(data);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                layer.alert("上传失败，请检查网络后重试");
+            }
+        });
 
+    }
+
+</script>
 @endsection

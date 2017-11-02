@@ -4,11 +4,10 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Artcal_list extends Model
-{	
+class Subject extends Model
+{   
 	//获取文章列表表单
-    public $table = 'artical_list';
+    public $table = 'subject';
 
     //关联的表的主键
     public $primaryKey = 'id';
@@ -17,15 +16,9 @@ class Artcal_list extends Model
 	//不允许数据表被批量操作的字段
     public $guarded = [];
 
-    public function detail ()
+    public function list ()
     {
-    	return $this->hasone('App\Http\Models\Artcal_detail','art_id','id');
-    }
-
-
-    public function subject ()
-    {
-        return $this->belongsTo('App\Http\Models\subject','pro_id','id');
+    	return $this->hasMany('App\Http\Models\Artcal_list','pro_id','id');
     }
 
     // use SoftDeletes;

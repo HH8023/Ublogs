@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+
     return view('admin.index');
 });
 //后台登录
@@ -38,14 +39,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 	// Route::post('user/add', 'UserController@add');
 
 
-	// 文章模块
+	//文章模块
 	Route::resource('article','ArticleController');
-
-	//图片列表页显示
-	Route::get('particle','ArticleController@plist');
+	//文件上传路由
+    Route::post('upload','ArticleController@upLoad');
 	//文章编辑页面
 	//Route::get('article/wzbj','ArticleController');
-
 
 	//栏目模块
 	Route::resource('subject','SubjectController');
@@ -56,20 +55,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 	//友情链接
 	Route::resource('links','LinksController');
 	
-
-
 	// 网站配置
     Route::resource('config','ConfigController');
     // 修改路由
     Route::post('config/changecontent','ConfigController@changeContent');
 	// 写入配置
     Route::get('putfile','ConfigController@putFile');
-
-
+    // 回收站
+	Route::resource('recovery','RecController');
   //广告管理
 	Route::resource('advert','AdvertisingController');
 	
-
 });
 
 
