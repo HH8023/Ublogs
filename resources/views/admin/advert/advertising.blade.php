@@ -32,11 +32,11 @@
                
             <div class="widget-body  widget-body-lg am-fr">
 
-                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " >
                
                     <thead>
                         <tr>
-                            <th>ad_id</th>
+                            <th>广告		id</th>
                             <th>用户</th>
                             <th>标题</th>
                             <th>广告图</th>
@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                             <a href="{{ url('admin/advert/create')}}">
-                                <i class="am-icon-pencil"></i> 添加
+                                <i class="am-icon-pencil"></i> 添加广告
                             </a>
                     <tbody>
                  
@@ -59,7 +59,7 @@
                             <td>{{ $v->ad_title }}</td>
                             <td><img src='{{ asset("image/"."$v->ad_image") }}' style="width:100px;"></td>
                             <td>{{ $v->ad_address }}</td>
-                            <td>{{ $v->ad_state }}</td>
+                            <td>{{ $v->ad_state==1?'开启':'关闭' }}</td>
                             <td>{{ $v->start_time }}</td>
                              <td>{{ $v->end_time }}</td>
                         
