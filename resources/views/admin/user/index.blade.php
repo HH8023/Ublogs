@@ -70,7 +70,7 @@
                                 <td>{{ $user->tel }}</td>
                                 <td>{{ $user->password }}</td>
                                 <td>{{ ($user->sex==1)?'男':'女' }}</td>
-                                <td>{{ $user->photo }}</td>
+                                <td><img src="{{ asset('admin/assets/img/upload/'.$user->photo) }}" style="width: 60px;"></td>
                                 <td>{{ $user->birthday }}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
