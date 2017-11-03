@@ -215,23 +215,9 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 文章管理
-                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    <a href="{{ url('admin/article') }}" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 文章列表
                     </a>
-                    <ul class="sidebar-nav sidebar-nav-sub">
-                        <li class="sidebar-nav-link">
-                            <a href="{{ url('admin/article') }}">
-                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 文章列表
-                            </a>
-                        </li>
-
-                        <li class="sidebar-nav-link">
-                            <a href="{{ url('admin/particle') }}">
-                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">

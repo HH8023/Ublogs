@@ -21,30 +21,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
-                        <div class="am-form-group tpl-table-list-select">
-                            <select data-am-selected="{btnSize: 'sm'}">
-                              <option value="option1">栏目名</option>
-                              <option value="option2">IT业界</option>
-                              <option value="option3">数码产品</option>
-                              <option value="option3">笔记本电脑</option>
-                              <option value="option3">平板电脑</option>
-                              <option value="option3">只能手机</option>
-                              <option value="option3">超极本</option>
-                            </select>
+                    <form action="{{ url('admin/article') }}" id="frm">
+                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                            <div class="am-form-group tpl-table-list-select">
+                                <select data-am-selected="{btnSize: 'sm'}" name="pid"> 
+                                        <option selected>--请选择分类--</option>                          
+                                        <option value="0" >显示所有</option>
+                                        @foreach ($pro as $b)
+                                        <option value="{{ $b->id }}">{{ $b->name }}</option>
+                                        @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-                    <form action="{{ url('admin/article') }}">
-                        <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                            <input type="text" class="am-form-field " name="name">
-                            <span class="am-input-group-btn">
-                                <input  class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="submit" >
-                            </span>
-                        </div>
+                       
                     </form>
-                    </div>
-                <form action="#" method='post'>
+                    <form action="{{ url('admin/article') }}">
+                        <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                        
+                            <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                <input type="text" class="am-form-field " name="name">
+                                <span class="am-input-group-btn">
+                                    <input  class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="submit" >
+                                </span>
+                            </div>
+                        
+                        </div>
+                     </form>   
                     <div class="am-u-sm-12">
                         <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
                             <thead>
@@ -78,7 +80,7 @@
                                            <!--  <a href="javascript:;" class="tpl-table-black-operation-del">
                                                 <i class="am-icon-asterisk"></i> 审核
                                             href="javascript:" onclick="doDel({{ $a->id }})"
-                                            </a> -->                                                        
+                                            </a> -->                                                        d
                                         </div>
                                     </td>
                                 </tr>
@@ -87,11 +89,10 @@
                             </tbody>
                         </table>
                     </div>
-                </form>
                      
                     <div class="am-u-lg-12 am-cf">
                         <div class="am-fr">
-                           {!! $title->render() !!}
+                           {!! $title->appends(['name' => $input])->render() !!}
                         </div>
                     </div>
                 </div>
@@ -102,7 +103,7 @@
 
 <!-- </form> -->
 
-@endsection
+
 <script>
 function doDel(id){
 
@@ -132,4 +133,12 @@ function doDel(id){
 
     });
 }
+ $('select').change(function() {
+        var pid = $("option:selected").val();
+        // alert(pid);
+        $('#frm').submit();
+    });
+
+ 
 </script>
+@endsection
