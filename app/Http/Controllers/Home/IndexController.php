@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Http\Models\Artcal_list;
+use App\Http\Models\Artcal_detail;
+use App\Http\Models\Subject;
+use App\Http\Models\UserInfo;
 use App\Http\Controllers\Controller;
+use DB;
 
 class IndexController extends Controller
 {
@@ -26,10 +30,19 @@ class IndexController extends Controller
      *  列表页对应的控制器方法
      * @return \Illuminate\Http\Response
      */
-    public function cate($id)
-    {
-        //
-        echo 222;
+    public function article($id)
+    {    
+
+        $pro = Subject::where('id',$id)->first();
+        // $pro = DB::table('subject')->where('id', $id)->first();
+        $title = Artcal_list::where('pro_id',$pro->id)->get();
+       
+        $aid= Artcal_detail::get();
+
+        $uid = UserInfo::get();
+       
+
+        return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid]);
     }
 
     /**
@@ -38,11 +51,16 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function article($id)
-    {
-        //
-        echo 3333;
-    }
+    // public function list()
+    // {
+    //     //
+    //     $aid= Artcal_detail::get();
+    //     $title = Artcal_list::get();
+    //     $pro = Subject::get();;
+    //     // 查看detail表内容
+        
+    //     return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro]);
+    // }
 
    
 }

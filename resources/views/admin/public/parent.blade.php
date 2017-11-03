@@ -215,7 +215,7 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="{{ url('admin/article') }}">
+                    <a href="{{ url('admin/article') }}" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 文章列表
                     </a>
                 </li>

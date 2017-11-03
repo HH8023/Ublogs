@@ -79,9 +79,9 @@ Route::post('home/dologin','Home\LoginController@doLogin');
 // 前台路由群组
 Route::get('/home/index','Home\IndexController@index');
 //前台列表页路由
-Route::get('/cate/{id}','Home\IndexController@cate');
+Route::get('/article','Home\IndexController@list');
+Route::get('/article/{id}','Home\IndexController@article');
 //前台详情页路由
-Route::get('/a/{id}','Home\IndexController@article');
 
 
 // 前台群组路由   @张彦写的

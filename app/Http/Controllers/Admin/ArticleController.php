@@ -10,6 +10,7 @@ use App\Http\Models\Artcal_detail;
 
 use App\Http\Models\Subject;
 use Illuminate\Support\Facades\Input;
+use DB;
 
 class ArticleController extends Controller
 {
@@ -30,40 +31,25 @@ class ArticleController extends Controller
         }
     }
 
-    /**
-     * 图文列表
-     *搜索分页 没写
-     * @return \Illuminate\Http\Response
-     */
-
-    public function plist()
-    {
-        return view('admin.article.plist');
-    }
-
     public function index(Request $request)
     {   
 
-        //保存搜索的条件
-        // $where = []; 
-        // $ob = Artcal_list::get();
-        // // 判断是否搜索了name字段
-        // //dd($ob);
-        // if($request->has('name')){
-        //     // 获取用户搜索的Name字段的值
-        //     $name = $request->input('name');
-        //     $where['name'] = $name;
-        //     //给查询语句添加上where条件
-        //     $ob->where('name', 'like', '%'.$name.'%');
-        // }
-        // $title = $ob;
+        //栏目列表,并获取栏目传过来的id
+        $pro = Subject::get();
+        $info = $request->input('pid')?$request->input('pid'):'';;
+        
+        //文章列表,并获取栏目传过来的name进行搜索
+        $art = Artcal_list::get();
 
-        // $title = Artcal_list::paginate(15);
+        $input = $request->input('name')?$request->input('name'):'';   
+        
+        if ($info) {
+            $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->where('pro_id',$info)->paginate(5);
+        }else{
+            $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->paginate(5);
+        }
 
-        // return view('admin.article.index', ['title' => $title,'where'=>$where]);
-        $input = $request->input('name')?$request->input('name'):'';
-        $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->paginate(5);
-        return view('admin.article.index',compact('title','input'));
+        return view('admin.article.index',compact('title','input','pro'));
 
     }
 
@@ -81,7 +67,7 @@ class ArticleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *内容没完成
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -125,7 +111,7 @@ class ArticleController extends Controller
 
     /**
      * 文章查看页面
-     *内容没完成
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
