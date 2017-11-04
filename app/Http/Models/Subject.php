@@ -21,6 +21,11 @@ class Subject extends Model
     	return $this->hasMany('App\Http\Models\Artcal_list','pro_id','id');
     }
 
+    //栏目关注
+    public function att_id()
+    {
+        return $this->belongsTo('App\Http\Models\Attentions','pro_id','id');
+    }
     // use SoftDeletes;
 
     // public $dates = ['deleted_at'];

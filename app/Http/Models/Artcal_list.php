@@ -35,4 +35,5 @@ class Artcal_list extends Model
         return $this->belongsTo('App\Http\Models\UserInfo','user_id','uid');
     }
 
+
 }

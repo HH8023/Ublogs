@@ -80,7 +80,7 @@
                                            <!--  <a href="javascript:;" class="tpl-table-black-operation-del">
                                                 <i class="am-icon-asterisk"></i> 审核
                                             href="javascript:" onclick="doDel({{ $a->id }})"
-                                            </a> -->                                                        d
+                                            </a> -->                                                        
                                         </div>
                                     </td>
                                 </tr>

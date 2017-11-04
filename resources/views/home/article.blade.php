@@ -137,8 +137,12 @@
         <a class="avatar-collection" href="/c/RfYyQj">
      
           <img src="{{ asset('upload/'.$pro->photo) }}" alt="240" />
-       
-</a>        <div class="follow-button" props-data-following="false" props-data-collection-id="12"></div>
+      <form id="frm" action="{{ url('home/article') }}">
+   
+</a>        <button class="btn btn-hollow" props-data-following="false" value="1">点击关注</button>
+      
+      
+      </form>
           <a class="btn btn-hollow" href="/sign_in?utm_medium=not-signed-in-contribute-button&amp;utm_source=desktop">投稿</a>
 
         <div class="title">
@@ -260,7 +264,16 @@
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(bp, s);
   })();
-</script>
 
+  $('#frm').click(function() {
+      if (2) {
+        alert(11);
+      };
+      
+
+      
+    });
+</script>
+  
   </body>
 </html>
