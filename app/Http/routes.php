@@ -68,28 +68,32 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 	
 });
 
-//前台登录
-Route::get('home/login','Home\LoginController@login');
-Route::get('home/register','Home\LoginController@register');
-Route::get('home/code','Home\LoginController@code');
-Route::post('home/doregister','Home\LoginController@doRegister');
-Route::post('home/dologin','Home\LoginController@doLogin');
+	//前台登录
+	Route::get('home/login','Home\LoginController@login');
+	Route::get('home/register','Home\LoginController@register');
+	Route::get('home/code','Home\LoginController@code');
+	Route::post('home/doregister','Home\LoginController@doRegister');
+	Route::post('home/dologin','Home\LoginController@doLogin');
 
 
-// 前台路由群组
-Route::get('/home/index','Home\IndexController@index');
-//前台列表页路由
-Route::get('/article','Home\IndexController@list');
-Route::get('/article/{id}','Home\IndexController@article');
-//前台详情页路由
+	// 前台路由群组
+	Route::get('/home/index','Home\IndexController@index');
+	//前台列表页路由
+	Route::get('/article','Home\IndexController@list');
+	Route::get('/article/{id}','Home\IndexController@article');
 
+	// 前台个人中心--个人资料
+	Route::get('home/user','Home\UserController@index');
+	//             --密码修改
+	Route::get('home/user/password','Home\UserController@doPwd');
+	//             --我的文章
+	Route::get('home/user/article','Home\UserController@article');
 
 // 前台群组路由   @张彦写的
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
 
-//详情
-Route::get('datails','DatailsController@index');
-
+	//详情
+	Route::get('datails','DatailsController@index');
 
 });
 

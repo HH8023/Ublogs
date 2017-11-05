@@ -42,7 +42,14 @@
 <meta name="csrf-token" content="AMg+PRAXcTf7a3btdssPEB45SNQxmLLbNsOqeNpEV7u+2waHgabTf8PynatBb+jJVqqoWzWfU558leBQ3lqWJw==" />
 
   <link rel="stylesheet" media="all" href="{{ asset('home/css/web-b6ffb2ef57d077ea3cf8_6.css') }}" />
-  
+  <link rel="stylesheet" type="text/css" href="{{ asset('home/AmazeUI-2.4.2/assets/css/admin.css') }}" />
+  <link  rel="stylesheet" type="text/css" href="{{ asset('home/AmazeUI-2.4.2/assets/css/amazeui.css') }}" />
+  <link  rel="stylesheet" type="text/css" href="{{ asset('home/css/stepstyle.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('home/css/personal.css') }}" />
+  <link  rel="stylesheet" type="text/css" href="{{ asset('home/css/infstyle.css') }}" />
+  <script  type="text/javascript" src="{{ asset('home/AmazeUI-2.4.2/assets/js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('home/js/jquery-1.7.2.min.js') }}"></script>
+  <script  type="text/javascript" src="{{ asset('home/AmazeUI-2.4.2/assets/js/amazeui.js') }}"></script>
   <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-568c39093a4cda20e253_1.css') }}" />
 
  <!--  <link href="//cdn2.jianshu.io/assets/favicons/favicon-03411b154a430b85d807b4366489c21122fb983a38f3d7ca926f882e6367b13e.ico" rel="icon">
@@ -132,167 +139,8 @@
     
 <div class="container index">
   <div class="row">
-    <!-- Banner -->
-        <div id="indexCarousel" class="carousel slide">
-          <!--ol class="carousel-indicators">
-              <li data-target="#indexCarousel" data-slide-to="0"
-                class="active"></li>
-              <li data-target="#indexCarousel" data-slide-to="1"
-                class=""></li>
-              <li data-target="#indexCarousel" data-slide-to="2"
-                class=""></li>
-              <li data-target="#indexCarousel" data-slide-to="3"
-                class=""></li>
-              <li data-target="#indexCarousel" data-slide-to="4"
-                class=""></li>
-              <li data-target="#indexCarousel" data-slide-to="5"
-                class=""></li>
-              <li data-target="#indexCarousel" data-slide-to="6"
-                class=""></li>
-          </ol-->
-          <div class="carousel-inner">
-              <div class="item active">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/4445c9f0a137?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/f9fc7f3cdb0a714ee27e75313ca1228f8c382542_1.jpg" alt="540" /></a>
-                </div>
-              </div>
-              <div class="item ">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/dcaa4863dfd0?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/5807b3a193a469cd47967f514cf63141ab0843f1_1.jpg" alt="540" /></a>
-                </div>
-              </div>
-              <div class="item ">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/a7d4fa6d4d64?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/95dba664dfa5414b0610a0f484098787818fa109_1.jpg" alt="540" /></a>
-                </div>
-              </div>
-              <div class="item ">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/890531f8ee26?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/fc8a519c358534c451ca48acca2f603a3f68d0bf_1.jpg" alt="540" /></a>
-                </div>
-              </div>
-              <div class="item ">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/88778d6af7c0?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/6950ffb012eaf3bfeb513e7befa94751ae22fed2_1.png" alt="540" /></a>
-                </div>
-              </div>
-              <div class="item ">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/ac0d529abbfa?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/595da283c527291bf78adae750cb429bf2a1c22d_1.jpg" alt="540" /></a>
-                </div>
-              </div>
-              <div class="item ">
-                <div class="banner">
-                    <a target="_blank" href="http://www.jianshu.com/p/0434f8677511?utm_medium=index-banner&amp;utm_source=desktop"><img src="picture/7ab7e22f4938b226687e0f71d82e43f950c6cfe4_1.jpg" alt="540" /></a>
-                </div>
-              </div>
-          </div>
-          <a class="left carousel-control" href="#indexCarousel" role="button" data-slide="prev"><i class="iconfont ic-previous-s"></i></a>
-          <a class="right carousel-control" href="#indexCarousel" role="button" data-slide="next"><i class="iconfont ic-next-s"></i></a>
-        </div>
-
-    <!-- Banner -->
-    <div class="col-xs-16 main">
-        <div class="recommend-collection">
-            <a class="collection" target="_blank" href="/c/RfYyQj?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/1239240801_1.jpg" alt="64" />
-              <div class="name">散文</div>
-</a>            <a class="collection" target="_blank" href="/c/96db294f24cb?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/16266155_1449641396772_1.jpg" alt="64" />
-              <div class="name">乡土故事</div>
-</a>            <a class="collection" target="_blank" href="/c/GQ5FAs?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/66ba9fdegw1e61syw6tk6j20bj0go0wo_1.jpg" alt="64" />
-              <div class="name">谈谈情，说说爱</div>
-</a>            <a class="collection" target="_blank" href="/c/bc2986022c08?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/0714_1.jpg" alt="64" />
-              <div class="name">时差党</div>
-</a>            <a class="collection" target="_blank" href="/c/f6b4ca4bb891?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/enhanced-buzz-wide-16461-1372163238-8_1.jpg" alt="64" />
-              <div class="name">生活家</div>
-</a>            <a class="collection" target="_blank" href="/c/fcd7a62be697?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/1_1.jpg" alt="64" />
-              <div class="name">世间事</div>
-</a>            <a class="collection" target="_blank" href="/c/xYuZYD?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="picture/0__15815600_401_00_1.jpg" alt="64" />
-              <div class="name">连载小说</div>
-</a>
-            <a class="more-hot-collection" target="_blank" href="/recommendations/collections?utm_medium=index-collections&amp;utm_source=desktop">
-              更多热门专题 <i class="iconfont ic-link"></i>
-</a>        </div>
-      <div class="split-line"></div>
-      <div id="list-container">
-        <!-- 文章列表模块 -->
-        <ul class="note-list" infinite-scroll-url="/">
-          
-        <li id="note-18477749" data-note-id="18477749" class="have-img">
-            <a class="wrap-img" href="/p/de25df475d82" target="_blank">
-              <img data-echo="//upload-images.jianshu.io/upload_images/2542851-417d67bc9a2579a1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" class="img-blur" src="picture/2542851-417d67bc9a2579a1_1.jpg" alt="120" />
-            </a>
-          <div class="content">
-            <div class="author">
-              <a class="avatar" target="_blank" href="/u/62478ec15b74">
-                <img src="picture/0dca220dd6bb_1.jpeg" alt="64" />
-        </a>      <div class="name">
-                <a class="blue-link" target="_blank" href="/u/62478ec15b74">怀左同学</a>
-                <span class="time" data-shared-at="2017-10-18T09:06:24+08:00"></span>
-              </div>
-            </div>
-            <a class="title" target="_blank" href="/p/de25df475d82">在大学，最应该做些什么？</a>
-            <p class="abstract">
-              文/怀左同学 01 读者经常问我关于大学的问题，最多的一个是：在大学，我应该做些什么？ 说实话，这个问题我没法回答，因为我们早就反对填鸭式教育了。如果我给你列个一二三的可行计...
-            </p>
-            <div class="meta">
-                <a class="collection-tag" target="_blank" href="/c/yD9GAd">读书</a>
-              <a target="_blank" href="/p/de25df475d82">
-                <i class="iconfont ic-list-read"></i> 13180
-        </a>        <a target="_blank" href="/p/de25df475d82#comments">
-                  <i class="iconfont ic-list-comments"></i> 245
-        </a>      <span><i class="iconfont ic-list-like"></i> 1016</span>
-                <span><i class="iconfont ic-list-money"></i> 4</span>
-            </div>
-          </div>
-        </li>   
-
-        </ul>
-        <!-- 文章列表模块 -->
-      </div>
-    </div>
-    <div class="col-xs-7 col-xs-offset-1 aside">
-      <div class="board">
-          <a target="_blank" href="/recommendations/notes?category_id=56&amp;utm_medium=index-banner-s&amp;utm_source=desktop">
-            <img src="picture/" alt="Banner s 1" />
-</a>        <a target="_blank" href="/trending/weekly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/" alt="Banner s 3" /></a>
-        <a target="_blank" href="/trending/monthly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/" alt="Banner s 4" /></a>
-        <a utm_medium="index-banner-s" target="_blank" href="/publications"><img src="picture/" alt="Banner s 5" /></a>
-        <a target="_blank" href="/c/e048f1a72e3d?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="picture/" alt="Banner s 6" /></a>
-      </div>
-
-      <!-- 首页右侧 App 下载提示 -->
-      <a class="col-xs-8 download" data-toggle="popover" data-placement="top" data-html="true" data-trigger="hover" data-content="&lt;img src=&quot;//cdn2.jianshu.io/assets/web/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393.png&quot; alt=&quot;Download app qrcode&quot; /&gt;" href="/apps">
-        <img class="qrcode" src="picture/download-app-qrcode-0257cd2c1d094cba9caa7bdc9e5a1393_1.png" alt="Download app qrcode" />
-        <div class="info">
-          <div class="title">广告图片区域<i class="iconfont ic-link"></i></div>
-          <div class="description">随时随地发现</div>
-        </div>
-</a>
-      <!-- 简书日报 -->
-        <div class="jianshu-daily">
-          <div class="title">
-            广告区域
-            <a target="_blank" href="/c/80e7d5d15e71?utm_medium=index-jianshu-daily-page&amp;utm_source=desktop">广告区域</a>
-          </div>
-            <a target="_blank" class="note" href="/p/49f67747e75f?utm_medium=index-jianshu-daily-note&amp;utm_source=desktop">
-                <img src="picture/619393-94f17f88b03d834f_1.png" alt="96" />
-              <div class="note-title">广告广告012——广告广告广告？﻿</div>
-</a>            <a target="_blank" class="note" href="/p/1ed24a065d9e?utm_medium=index-jianshu-daily-note&amp;utm_source=desktop">
-                <img src="picture/568470-f6166712849ee23f_1.png" alt="96" />
-              <div class="note-title">广告广告171018 —广告广告广告广告广告广告广告广告</div>
-</a>        </div>
-
-      <!-- 推荐作者 -->
-      <div data-vcomp="recommended-author-list"></div>
-    </div>
-  </div>
+      @yield('content')
+  </div> 
 </div>
 <div data-vcomp="side-tool"></div>
 <footer class="container">
@@ -320,11 +168,11 @@
 
     <script type="application/json" data-name="page-data">{"user_signed_in":false,"locale":"zh-CN","os":"other","read_mode":"day","read_font":"font2"}</script>
     
-    <script src="js/babel-polyfill-676833c6a4d68573b4c3_1.js" crossorigin="anonymous"></script>
-    <script src="js/web-base-9e640fd8a4bb1abb5d6a_5.js" crossorigin="anonymous"></script>
-<script src="js/web-06eafca9d97868f774e0_5.js" crossorigin="anonymous"></script>
+    <script  crossorigin="anonymous" src="{{ asset('home/js/babel-polyfill-676833c6a4d68573b4c3_1.js') }}"></script>
+    <script  crossorigin="anonymous" src="{{ asset('home/js/web-base-9e640fd8a4bb1abb5d6a_5.js') }}"></script>
+<script  crossorigin="anonymous" src="{{ asset('home/js/web-06eafca9d97868f774e0_5.js') }}"></script>
     
-    <script src="js/entry-bc590a7721c32bb9089a_1.js" crossorigin="anonymous"></script>
+    <script  crossorigin="anonymous" src="{{ asset('home/js/entry-bc590a7721c32bb9089a_1.js') }}"></script>
     <script>
   (function(){
       var bp = document.createElement('script');
