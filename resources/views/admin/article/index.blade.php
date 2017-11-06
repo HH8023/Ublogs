@@ -67,7 +67,11 @@
                                         <img src="{{ asset('/'.$a->photo) }}" class="tpl-table-line-img" alt="" > 
                                     </td>
                                     <td>{{ $a->title }}</td>
-                                    <td>{{ $a->user_id }}</td>
+                                    @foreach ($user as $b)
+                                        @if($a->user_id == $b->uid)
+                                    <td>{{ $b->nickname }}</td>
+                                        @endif
+                                    @endforeach
                                     <td>{{ $a->add_time }}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
@@ -80,7 +84,7 @@
                                            <!--  <a href="javascript:;" class="tpl-table-black-operation-del">
                                                 <i class="am-icon-asterisk"></i> 审核
                                             href="javascript:" onclick="doDel({{ $a->id }})"
-                                            </a> -->                                                        d
+                                            </a> -->                                                        
                                         </div>
                                     </td>
                                 </tr>

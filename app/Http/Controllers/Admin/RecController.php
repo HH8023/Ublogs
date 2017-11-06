@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use App\Http\Models\Artcal_list;
+use App\Http\Models\Artcal_detail;
+use App\Http\Models\UserInfo;
+use App\Http\Models\Subject;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
@@ -16,29 +19,26 @@ class RecController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        //保存搜索的条件
-        $where = [];
-        $ob = DB::table('artical_list')->where('status',1);
-//        dd($ob->get());
-        // 判断是否搜索了name字段
-        if($request->has('name')){
-            // 获取用户搜索的Name字段的值
-            $name = $request->input('name');
-            $where['name'] = $name;
-            //给查询语句添加上where条件
-            $ob->where('name', 'like', '%'.$name.'%');
+    {   
+
+         //栏目列表,并获取栏目传过来的id
+        $pro = Subject::get();
+        $info = $request->input('pid')?$request->input('pid'):'';;
+        
+        //文章列表,并获取栏目传过来的name进行搜索
+        $art = Artcal_list::get();
+
+        $input = $request->input('name')?$request->input('name'):'';   
+        $user = UserInfo::get();
+        if ($info) {
+            $title = Artcal_list::orderBy('id','desc')->where('status',1)->where('title','like','%'.$input.'%')->where('pro_id',$info)->paginate(5);
+        }else{
+            $title = Artcal_list::orderBy('id','desc')->where('status',1)->where('title','like','%'.$input.'%')->paginate(5);
         }
 
-//        $num = DB::table('artical_lists');
-//        dd($num->get());
+        return view('admin.recovery.index',compact('title','input','pro','user'));
 
-        // 原生sql
-        // $list = DB::select('select * from stu');
-        // 等价于
-        // 查询构造器（优雅）
-        $title = $ob->paginate(3);
-        return view('admin.recovery.index',['title' => $title, 'where'=>$where]);
+
     }
 
     /**
@@ -122,6 +122,24 @@ class RecController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //查询要删除的记录的模型
+        $title = Artcal_list::find($id);
+        $re = Artcal_detail::where('art_id',$id)->delete();
+        //$title= Artcal_detail::find($id)
+        //执行删除操作
+        $re = $title->delete();
+        //根据返回的结果处理成功和失败
+        if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'删除成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'删除失败'
+            ];
+        }
+        return  $data;
     }
 }

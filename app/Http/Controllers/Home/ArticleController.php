@@ -3,30 +3,25 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Http\Models\Artcal_list;
+use App\Http\Models\Artcal_detail;
+use App\Http\Models\Subject;
+use App\Http\Models\UserInfo;
+use App\Http\Models\Attentions;
 use App\Http\Controllers\Controller;
-use DB;
-class DatailsController extends Controller
+
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   
-
-         //获取详情列表库
-        $ob = DB::table('artical_dztails')->get();
-        //获取文章列表库
-        
-        $list = DB::table('artical_lists')->get();
-        // dd($list);       
-        return view('home.datails',['data'=>$ob,'list'=>$list]);
-
+    public function index()
+    {
+      
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +30,7 @@ class DatailsController extends Controller
      */
     public function create()
     {
-         //
+        
     }
 
     /**
@@ -46,7 +41,7 @@ class DatailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -56,8 +51,22 @@ class DatailsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        
+         //查找栏目的id
+        $pro = Subject::where('id',$id)->first();
+        //从栏目的id绑定文章的id
+        $title = Artcal_list::orderBy('id','desc')->where('pro_id',$pro->id)->where('status', 0)->get();
+        //获取文章内容表遍历到页面
+        $aid= Artcal_detail::get();
+        //获取用户的信息
+        // dd($aid);
+        $uid = UserInfo::get();
+        // //用户关注表
+        
+        // $att = Attentions::get();
+
+        return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid]);
     }
 
     /**

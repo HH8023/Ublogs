@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Artcal_list;
 use App\Http\Models\Artcal_detail;
-
+use App\Http\Models\UserInfo;
 use App\Http\Models\Subject;
 use Illuminate\Support\Facades\Input;
 use DB;
@@ -36,20 +36,19 @@ class ArticleController extends Controller
 
         //栏目列表,并获取栏目传过来的id
         $pro = Subject::get();
-        $info = $request->input('pid')?$request->input('pid'):'';;
-        
+        $info = $request->input('pid')?$request->input('pid'):'';;       
         //文章列表,并获取栏目传过来的name进行搜索
-        $art = Artcal_list::get();
+        $art = Artcal_list::get();       
+        $input = $request->input('name')?$request->input('name'):''; 
 
-        $input = $request->input('name')?$request->input('name'):'';   
-        
+        $user = UserInfo::get();
         if ($info) {
             $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->where('pro_id',$info)->paginate(5);
         }else{
             $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->paginate(5);
         }
 
-        return view('admin.article.index',compact('title','input','pro'));
+        return view('admin.article.index',compact('title','input','pro','user'));
 
     }
 
@@ -74,16 +73,10 @@ class ArticleController extends Controller
     public function store(Request $request)
     {   
         //去除令牌
-        $add = $request->except('_token','query_string');
+        $input = $request->except('_token');
         $add = new Artcal_list;
         $title = new Artcal_detail;
-        //栏目名字
-        // $pro = Subject::get();
-        // // $pro = $add->subject();
-        // return view('admin.article.add',['pro' => $pro]);
-        
-         // $pr=$pro->list->pro_id;
-        // dd($pro);
+
         // 文章list表添加内容
         $add->title = $request->title;
         $add->user_id = $request->user_id;
@@ -100,13 +93,26 @@ class ArticleController extends Controller
         $title->art_id = $id;
         $title->content = $request->content;
         $title->save();
+        //文章简介
+        $art=$title->content;
+        // 截取内容的长度
+        if(strlen($art) > 260){
+            $str = substr($art,3,260);
+            $title->art_synopsis = $str;
+            $detail =  $title->save();
+
+        }else {
+
+            $title->art_synopsis = $art;
+            $title->save();
+        }
 
         if($add){
             return redirect('admin/article');
         }else{
             //return '失败';
             return redirect('admin/article/create')->with('msg','添加失败');
-        }       
+        }      
     }
 
     /**

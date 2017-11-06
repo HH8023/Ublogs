@@ -137,8 +137,12 @@
         <a class="avatar-collection" href="/c/RfYyQj">
      
           <img src="{{ asset('upload/'.$pro->photo) }}" alt="240" />
-       
-</a>        <div class="follow-button" props-data-following="false" props-data-collection-id="12"></div>
+      <form id="frm" action="{{ url('home/article') }}">
+   
+</a>        <button class="btn btn-hollow" props-data-following="false" value="1">点击关注</button>
+      
+      
+      </form>
           <a class="btn btn-hollow" href="/sign_in?utm_medium=not-signed-in-contribute-button&amp;utm_source=desktop">投稿</a>
 
         <div class="title">
@@ -147,10 +151,10 @@
 
         </div>
         <div class="info">
-          收录了126214篇文章 · 1296897人关注
+          收录了{{ $title->count() }}篇文章 · 1296897人关注
         </div>
       </div>
-      <ul class="trigger-menu" data-pjax-container="#list-container"><li class=""><a href="/c/RfYyQj?order_by=commented_at"><i class="iconfont ic-latestcomments"></i> 最新评论</a></li><li class="active"><a href="/c/RfYyQj?order_by=added_at"><i class="iconfont ic-articles"></i> 最新收录</a></li><li class=""><a href="/c/RfYyQj?order_by=top"><i class="iconfont ic-hot"></i> 热门</a></li></ul>
+      <ul class="trigger-menu" data-pjax-container="#list-container"><li class=""></li><li class="active"><a href="/c/RfYyQj?order_by=added_at"><i class="iconfont ic-articles"></i> 最新收录</a></li><li class=""></li></ul>
       <div id="list-container">
         <!-- 文章列表模块 -->
 <ul class="note-list" infinite-scroll-url="/c/RfYyQj?order_by=added_at">  
@@ -174,12 +178,12 @@
     </div>   
      @endif
     @endforeach
-    <a class="title" target="_blank" href="/p/0b29dd73b5c8">{{ $a->title }}</a>
+    <a class="title" target="_blank" href="{{ url('home/details')}}">{{ $a->title }}</a>
    @foreach ($aid as $b)
    @if( $a->id == $b->art_id)
     <p class="abstract">
-      ﻿ {{$b->content}}
-    </p> 
+      {{$b->art_synopsis}}<b>...</b>
+   </p> 
     @endif
     @endforeach
     <div class="meta">
@@ -260,7 +264,16 @@
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(bp, s);
   })();
-</script>
 
+  $('#frm').click(function() {
+      if (2) {
+        alert(11);
+      };
+      
+
+      
+    });
+</script>
+  
   </body>
 </html>
