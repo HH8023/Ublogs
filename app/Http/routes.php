@@ -86,14 +86,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 	Route::post('home/loginout','Home\LoginController@doLogout');
 
 
-	// 前台路由群组
+	// 前台首页
 	Route::get('/home/index','Home\IndexController@index');
 	//前台列表页路由
 	Route::get('/article','Home\IndexController@list');
 	Route::get('/article/{id}','Home\IndexController@article');
 
 	// 前台个人中心--个人资料
-	Route::get('home/user','Home\UserController@index');
+	Route::post('home/user','Home\UserController@index');
 	//             --密码修改
 	Route::get('home/user/password','Home\UserController@doPwd');
 	//             --我的文章
@@ -104,7 +104,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 
 // 前台群组路由   @张彦写的
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
-
 	//详情
 	Route::get('datails','DatailsController@index');
 

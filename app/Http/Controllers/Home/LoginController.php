@@ -82,7 +82,7 @@ class LoginController extends Controller
     {
 //        dd($request->all());
         $data = $request->except('_token');
-        $tel = DB::table('user')->where('tel', $data['tel'])->first();
+        $tel = DB::table('users')->where('tel', $data['tel'])->first();
 //        dd($tel);
         if($tel == null){
             return redirect('home/register')->with('msg','无此用户，请先注册');
@@ -94,7 +94,7 @@ class LoginController extends Controller
                 return redirect('home/login')->with('msg','密码不正确');
             }
             session(['tel'=>$tel]);
-            echo 12345;
+            return redirect('home/index');
         }
     }
     // 重置密码页
