@@ -85,7 +85,13 @@ Route::get('/a/{id}','Home\IndexController@article');
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
 
 //详情
-Route::get('datails','DatailsController@index');
+
+Route::get('details/{id}','DetailsController@show');
+Route::get('comment','DetailsController@show');
+
+//编辑
+Route::get('edit','EditController@create');
+Route::post('add','EditController@store');
 
 
 });

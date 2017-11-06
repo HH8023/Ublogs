@@ -36,7 +36,7 @@
                
                     <thead>
                         <tr>
-                            <th>广告		id</th>
+                            <th>广告id</th>
                             <th>用户</th>
                             <th>标题</th>
                             <th>广告图</th>
@@ -59,7 +59,7 @@
                             <td>{{ $v->ad_title }}</td>
                             <td><img src='{{ asset("image/"."$v->ad_image") }}' style="width:100px;"></td>
                             <td>{{ $v->ad_address }}</td>
-                            <td>{{ $v->ad_state==1?'开启':'关闭' }}</td>
+                            <td>{{ $v->ad_state==0?'开启':'关闭' }}</td>
                             <td>{{ $v->start_time }}</td>
                              <td>{{ $v->end_time }}</td>
                         

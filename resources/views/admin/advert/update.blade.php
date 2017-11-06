@@ -58,7 +58,7 @@
                                         <div class="am-u-sm-9">
                                              <div class="result_wrap">
                                                 <ul class="list_btn">
-                                                    <li><input name="ad_image" type="file"> <span onclick="pic_minus(this)" value="{{$adve->ad_image}}"><i class="fa fa-minus-circle"></i></span></li>
+                                                    <li><input name="ad_image" type="file" style='width:280px'> <span onclick="pic_minus(this)" value="{{$adve->ad_image}}"><i class="fa fa-minus-circle"></i></span></li>
                                                 </ul>
                                             </div>
 
