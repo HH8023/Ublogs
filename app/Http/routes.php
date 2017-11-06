@@ -70,11 +70,20 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 
 //前台登录
 Route::get('home/login','Home\LoginController@login');
+//注册
 Route::get('home/register','Home\LoginController@register');
+//获取验证码
 Route::get('home/code','Home\LoginController@code');
+//注册判断
 Route::post('home/doregister','Home\LoginController@doRegister');
+//登录判断
 Route::post('home/dologin','Home\LoginController@doLogin');
-
+//重置密码页
+Route::get('home/dopass','Home\LoginController@doPass');
+//重置密码页
+Route::post('home/resetpass','Home\LoginController@resetPass');
+//退出
+Route::post('home/loginout','Home\LoginController@doLogout');
 
 // 前台路由群组
 Route::get('/home/index','Home\IndexController@index');
