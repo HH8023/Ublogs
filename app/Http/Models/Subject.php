@@ -24,7 +24,7 @@ class Subject extends Model
     //栏目关注
     public function att_id()
     {
-        return $this->belongsTo('App\Http\Models\Attentions','pro_id','id');
+        return $this->hasMany('App\Http\Models\Attentions','id','pro_id');
     }
     // use SoftDeletes;
 

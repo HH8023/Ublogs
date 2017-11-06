@@ -85,7 +85,7 @@ Route::resource('home/article','Home\ArticleController');
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
 
 //详情
-Route::get('datails','DatailsController@index');
+Route::get('details','DatailsController@index');
 
 
 });

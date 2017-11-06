@@ -25,13 +25,13 @@ class Attentions extends Model
     //用户关注一对一
     public function uid ()
     {
-        return $this->hasOne('App\Http\Models\UserInfo','attention_id','uid');
+        return $this->belongsTo('App\Http\Models\UserInfo','uid','attention_id');
     }
 
     //用户栏目关注一对多
     public function pro ()
     {
-        return $this->hasMany('App\Http\Models\Subject','pro_id','id');
+        return $this->belongsTo('App\Http\Models\Subject','id','pro_id');
     }
 
 }

@@ -20,7 +20,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+      
     }
 
     /**
@@ -57,10 +57,12 @@ class ArticleController extends Controller
         //从栏目的id绑定文章的id
         $title = Artcal_list::where('pro_id',$pro->id)->get();
         //获取文章内容表遍历到页面
-        $aid= Artcal_detail::get();
+        $aid= Artcal_detail::orderBy('id','desc')->get();
         //获取用户的信息
+        // dd($aid);
         $uid = UserInfo::get();
         // //用户关注表
+
         // $att = Attentions::get();
 
         return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid]);

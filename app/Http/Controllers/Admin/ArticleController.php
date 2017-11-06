@@ -74,16 +74,10 @@ class ArticleController extends Controller
     public function store(Request $request)
     {   
         //去除令牌
-        $add = $request->except('_token','query_string');
+        $input = $request->except('_token');
         $add = new Artcal_list;
         $title = new Artcal_detail;
-        //栏目名字
-        // $pro = Subject::get();
-        // // $pro = $add->subject();
-        // return view('admin.article.add',['pro' => $pro]);
-        
-         // $pr=$pro->list->pro_id;
-        // dd($pro);
+
         // 文章list表添加内容
         $add->title = $request->title;
         $add->user_id = $request->user_id;
@@ -100,13 +94,26 @@ class ArticleController extends Controller
         $title->art_id = $id;
         $title->content = $request->content;
         $title->save();
+        //文章简介
+        $art=$title->content;
+        // 截取内容的长度
+        if(strlen($art) > 260){
+            $str = substr($art,3,260);
+            $title->art_synopsis = $str;
+            $detail =  $title->save();
+
+        }else {
+
+            $title->art_synopsis = $art;
+            $title->save();
+        }
 
         if($add){
             return redirect('admin/article');
         }else{
             //return '失败';
             return redirect('admin/article/create')->with('msg','添加失败');
-        }       
+        }      
     }
 
     /**

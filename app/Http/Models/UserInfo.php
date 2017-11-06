@@ -31,7 +31,7 @@ class UserInfo extends Model
     //用户关注一对一
      public function att_id ()
     {
-        return $this->belongsTo('App\Http\Models\Attentions','attention_id','uid');
+        return $this->hasOne('App\Http\Models\Attentions','uid','attention_id');
     }
 
 }

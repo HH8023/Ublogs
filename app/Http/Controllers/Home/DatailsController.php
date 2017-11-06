@@ -18,7 +18,7 @@ class DatailsController extends Controller
     {   
 
          //获取详情列表库
-        $ob = DB::table('artical_datails')->get();
+        $ob = DB::table('artical_dztails')->get();
         //获取文章列表库
         
         $list = DB::table('artical_lists')->get();
