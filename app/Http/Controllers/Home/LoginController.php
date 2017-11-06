@@ -71,7 +71,7 @@ class LoginController extends Controller
             //如果有id说明添加成功
             if($id > 0){
                 //跳转到/types路由，携带一个闪存
-                return view('home/user',$data)->with('msg','注册成功，请完善个人信息');
+                return view('home/login')->with('msg','注册成功，请完善个人信息');
             }
         }else{
             return redirect('home/login')->with('msg','用户已注册，请登录');
@@ -80,21 +80,22 @@ class LoginController extends Controller
     // 前台登录
     public function doLogin(Request $request)
     {
-//        dd($request->all());
+       // dd($request->all());
         $data = $request->except('_token');
         $tel = DB::table('users')->where('tel', $data['tel'])->first();
-//        dd($tel);
+       // dd($tel);
         if($tel == null){
             return redirect('home/register')->with('msg','无此用户，请先注册');
         }else{
 //            密码解密
             $pass = Crypt::decrypt($tel->password);
-//            dd($data['password']);
+           // dd($data['password']);
             if ($data['password'] !== $pass) {
                 return redirect('home/login')->with('msg','密码不正确');
             }
             session(['tel'=>$tel]);
             return redirect('home/index');
+            // echo 124;
         }
     }
     // 重置密码页
@@ -138,6 +139,6 @@ class LoginController extends Controller
     public function doLogout(Request $request)
     {
         $request->session()->pull('tel');
-        return redirect('admin/login');
+        return redirect('home/login');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
@@ -17,9 +16,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $user = DB::table('users')->get();
-        dd($user);
-        return view('home.user.index');
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        // $user = DB::table('users')->get();
+        // dd($user);
+        return view('home.user.index',compact('configs','links'));
     }
 
     /**

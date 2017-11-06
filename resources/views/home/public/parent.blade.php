@@ -34,10 +34,9 @@
   <!-- Apple -->
   <meta name="apple-mobile-web-app-title" content="Ublog">
 
-  
-
-    <title>Ublog - Love—blog</title>
-
+    @foreach($configs as $v)
+    <title>{{ $v->conf_title }}</title>
+    @endforeach
   <meta name="csrf-param" content="authenticity_token" />
 <meta name="csrf-token" content="AMg+PRAXcTf7a3btdssPEB45SNQxmLLbNsOqeNpEV7u+2waHgabTf8PynatBb+jJVqqoWzWfU558leBQ3lqWJw==" />
 
@@ -51,14 +50,6 @@
   <script type="text/javascript" src="{{ asset('home/js/jquery-1.7.2.min.js') }}"></script>
   <script  type="text/javascript" src="{{ asset('home/AmazeUI-2.4.2/assets/js/amazeui.js') }}"></script>
   <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-568c39093a4cda20e253_1.css') }}" />
-
- <!--  <link href="//cdn2.jianshu.io/assets/favicons/favicon-03411b154a430b85d807b4366489c21122fb983a38f3d7ca926f882e6367b13e.ico" rel="icon">
-      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png" sizes="57x57" />
-      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png" sizes="72x72" />
-      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png" sizes="76x76" />
-      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png" sizes="114x114" />
-      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png" sizes="120x120" />
-      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png" sizes="152x152" /> -->
 
   <!-- Start of 访问统计 -->
   <script>
@@ -86,6 +77,7 @@
 
   <body lang="zh-CN" class="reader-black-font">
     <!-- 全局顶部导航栏 -->
+    @if(empty(session('tel')))     
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="width-limit">
     <!-- 左上方 Logo -->
@@ -93,12 +85,11 @@
 
     <!-- 右上角 -->
       <!-- 未登录显示登录/注册/写文章 -->
-        <a class="btn write-btn" target="_blank" href="/writer#/">
-            <i class="iconfont ic-write">
-                
+        <a class="btn write-btn" target="_blank" href="{{ url('/home/login') }}">
+            <i class="iconfont ic-write">  
             </i>写文章</a>   
-        <a class="btn sign-up" href="{{ url('/home/login') }}">注册</a>
-        <a class="btn log-in" href="{{ url('/home/register') }}">登录</a>
+        <a class="btn sign-up" href="{{ url('/home/register') }}">注册</a>
+        <a class="btn log-in" href="{{ url('/home/login') }}">登录</a>
 
     <!-- 如果用户登录，显示下拉菜单 -->
 
@@ -125,18 +116,83 @@
             <li class="">
               <a class="app-download-btn" href="#"><span class="menu-text">消息</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
             </li>
-          <li class="search">
-            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
-              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
-              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
-</form>          </li>
+          <li class="search" padding-left=130px;>
+            <form action="{{ url('/home/search') }}" name="" accept-charset="UTF-8" method="get">
+                <input name="utf8" type="hidden" value="" />
+                <input type="text" name="keywords" id="q" value="" placeholder="搜索" class="search-input" />
+                <a class="search-btn" ><i class=""></i></a>
+            </form>          
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </nav>
+    @else
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="width-limit">
+            <!-- 左上方 Logo -->
+            <a class="logo" href=""><!-- <img src="{{ asset('home/picture/') }}"> -->Ublog</a>
 
-    
+            <!-- 右上角 -->
+            <!-- 登录显示写文章 -->
+            <a class="btn write-btn" target="_blank" href="{{ url('/home/article/add') }}"><i class="iconfont ic-write"></i>写文章</a>
+            <!-- 如果用户登录，显示下拉菜单 -->
+            <div class="user">
+                <div data-hover="dropdown">
+                    <a class="avatar" href="{{ url('/home/user/') }}"><img src="{{ asset('home/picture/b52e96e4-2f5c-472f-906e-7a8b2b94d7ae.png') }}" alt="120"></a>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ url('/home/user') }}">
+                            <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/home/loginout') }}">
+                            <i class="iconfont ic-navigation-signout"></i><span>退出</span>
+                        </a>          
+                    </li>
+                </ul>
+            </div>
+            <div class="style-mode"><a class="style-mode-btn"><i class="iconfont ic-navigation-mode"></i></a>
+                <div class="popover-modal" style="left: 0px; display: none;">
+                    <div class="meta"><i class="iconfont ic-navigation-night"></i><span>夜间模式</span></div> 
+                    <div class="switch day-night-group"><a class="switch-btn">开</a> <a class="switch-btn active">关</a></div><hr> 
+                    <div class="switch font-family-group"><a class="switch-btn font-song">宋体</a><a class="switch-btn font-hei active">黑体</a></div> 
+                </div>
+            </div>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <!-- <a href="http://www.jianshu.com/">
+                                <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+                            </a> -->            
+                        </li>
+                        <li class="active">
+                            <a href="{{ url('/home/index') }}"><span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i></a>
+                        </li>
+                        <li class="search">
+                            <form target="_blank" action="{{ url('/home/search') }}" name="" accept-charset="UTF-8" method="get">
+                                <input name="utf8" value="✓" type="hidden">
+                                <input name="keywords" id="q" placeholder="搜索" class="search-input" type="text">
+                                <a class="search-btn" ><i class="iconfont ic-search"></i></a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    @endif
+
 <div class="container index">
   <div class="row">
       @yield('content')
@@ -144,23 +200,25 @@
 </div>
 <div data-vcomp="side-tool"></div>
 <footer class="container">
-  <div class="row">
-    <div class="col-xs-17 main">
-      
-
-
-
-
-
-
-<a target="_blank" href="http://www.jianshu.com/c/jppzD2">关于Ublog</a><em> · </em><a target="_blank" href="http://www.Ublog.com/contact">联系我们</a><em> · </em><a target="_blank" href="http://www.Ublog.com/c/bfeec2e13990">加入我们</a><em> · </em><a target="_blank" href="http://www.Ublog.com/p/fc1c113e5b6b">简书出版</a><em> · </em><a target="_blank" href="http://www.Ublog.com/press">品牌与徽标</a><em> · </em><a target="_blank" href="http://www.Ublog.com/faqs">帮助中心</a><em> · </em><a target="_blank" href="http://www.Ublog.com/p/cabc8fa39830">合作伙伴</a>      <div class="icp">
-        ©2012-2017 Ublog信息科技有限公司 / Ublog / 京ICP备1101XXXX号-X /  <a target="_blank" href="http://www./portal/registerSystemInfo?recordcode=31010402002252">XXX安备310104020XXXXX号 / </a>
-        <a target="_blank" href="http://www.Ublog.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">
-          <img src="picture/smrz-14723344f0991457bfc9f5172c219a5f_1.png" alt="Smrz" />
-</a>        <a target="_blank" href="#">沪公网安备31010402002252号 / </a>
+    <div class="row">
+    <div class="col-xs-17 main" style="margin: 0 auto;">
+      <a target="_blank" href="">关于Ublog</a><em> · </em><a target="_blank" href="">联系我们</a><em> · </em><a target="_blank" href="">加入我们</a><em> · </em><a target="_blank" href="">简书出版</a><em> · </em><a target="_blank" href="">品牌与徽标</a><em> · </em><a target="_blank" href="">帮助中心</a><em> · </em><a target="_blank" href="">合作伙伴</a>      
+      <div class="icp">
+        ©2012-2017 Ublog信息科技有限公司 / Ublog / 京ICP备1101XXXX号-X /  <a target="_blank" href="" style="color:blue;"></a>
+      <div class="icp" >
+        @foreach($configs as $v)
+          <a target="_blank" href="" style="color:blue;">友情链接:
+                    {{ $v->conf_copyright }}
+                 </a><em> · </em>
+        @endforeach
+        <br>
+        <a target="_blank" href="">
+          <img src="" alt="Smrz" />
+        </a>        
+        <a target="_blank" href="#">沪公网安备31010402002252号 / </a>
         <a target="_blank" href="http://www.Ublog.cn/">
           <img src="picture/wxb-a216456895eb66c17497dbd3da443cf8_1.png" alt="Wxb" />
-</a>        举报电话：021-34770013
+        </a>        举报电话：021-34770013
       </div>
     </div>
   </div>

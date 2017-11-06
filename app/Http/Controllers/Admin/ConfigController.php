@@ -6,38 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class ConfigController extends Controller
 {
-    //将数据库的配置文件写入web.php文件中，方便读取配置文件
-    public function putFile()
-    {
-        //获取要被写入的内容
-        //返回所需数据的数组
-       $con =  Config::lists('conf_content','conf_name')->all();
-
-        //将数组变成字符串格式
-      $str= '<?php   return '.var_export($con,true).';';
-        //die;
-
-        //将config表中的conf_name和conf_content两列的内容写入config文件夹下的web.php文件中
-        //file_put_content(要写入的文件,要被写入的内容)
-
-        file_put_contents(base_path().'/config/web.php',$str);
-    }
-
-    public function changeContent(Request $request)
-    {
-        //dd($request->all());
-        $input = $request->except('_token');
-        foreach($input['id'] as $k=>$v){
-            $conf = Config::find($v);
-            $conf->update(['conf_content'=>$input['conf_content'][$k]]);
-        }
-        $this->putFile();
-        return redirect('admin/config');
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -46,7 +18,12 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        return view('admin.config.index');
+        $configs = DB::table('configs');
+        $configs=$configs->get();
+        // dd($configs);
+        return view('admin.config.index',['configs' => $configs]);
+        
+
     }
 
     /**
@@ -67,7 +44,7 @@ class ConfigController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -101,7 +78,19 @@ class ConfigController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      // $configs = DB::table('configs')
+      //       ->where('id', 1)
+      //       ->update(['$configs' => 1]);
+      
+        $configs = $request->except('_token', '_method');
+        // dd($configs);
+        $res = DB::table('configs')->where('id', $id)->update($configs);
+        if($res > 0){
+            return redirect('admin/config')->with('msg', '修改成功');
+        }else{
+            return redirect('admin/config')->with('msg', '修改失败');
+        }
+        
     }
 
     /**

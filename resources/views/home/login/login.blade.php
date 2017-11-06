@@ -61,6 +61,7 @@
           <div class="js-sign-in-container">
               <form id="new_session" action="{{url('home/dologin')}}" accept-charset="UTF-8" method="post">
                     {{ csrf_field() }}
+
                     <!-- 正常登录登录名输入框 -->
                     <div class="input-prepend restyle js-normal">
                       <input placeholder="手机号" type="text" name="tel" id="phone" />
@@ -73,7 +74,7 @@
                   </div>
 
                   <div class="remember-btn">
-                    <input type="checkbox" value="true" checked="checked" name="session[remember_me]" id="session_remember_me" /><span>记住我</span>
+                    <input type="checkbox" value="true" checked="checked" name="session('remember_me')['password']" id="session_remember_me" /><span>记住我</span>
                   </div>
                   <div class="forget-btn">
                     <a class="" data-toggle="dropdown" href="">登录遇到问题?</a>

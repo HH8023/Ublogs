@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="aside">
     <div class="col-xs-16 col-xs-offset-8 main">
         <div class="top">

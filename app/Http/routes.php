@@ -48,15 +48,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 	
 	//栏目模块
 	Route::resource('subject','SubjectController');
-
 	//评论模块 
 	Route::resource('comment','CommentController');
-
 	//友情链接
 	Route::resource('links','LinksController');
-	
 	// 网站配置
     Route::resource('config','ConfigController');
+    // 网站配置修改
+    Route::post('config/{id}','ConfigController@update');
     // 修改路由
     Route::post('config/changecontent','ConfigController@changeContent');
 	// 写入配置
@@ -83,17 +82,19 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 	//重置密码页
 	Route::post('home/resetpass','Home\LoginController@resetPass');
 	//退出
-	Route::post('home/loginout','Home\LoginController@doLogout');
+	Route::get('home/loginout','Home\LoginController@doLogout');
 
 
 	// 前台首页
 	Route::get('/home/index','Home\IndexController@index');
-	//前台列表页路由
+	// 前台搜索
+	Route::get('/home/search','Home\IndexController@search');
+	//前台列表页
 	Route::get('/article','Home\IndexController@list');
 	Route::get('/article/{id}','Home\IndexController@article');
 
 	// 前台个人中心--个人资料
-	Route::post('home/user','Home\UserController@index');
+	Route::get('home/user','Home\UserController@index');
 	//             --密码修改
 	Route::get('home/user/password','Home\UserController@doPwd');
 	//             --我的文章

@@ -131,8 +131,4 @@
     </aside>
 </div>
 
-
-
-
-
 @endsection

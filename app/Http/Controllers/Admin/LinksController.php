@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Model\Friend;
+use App\Http\Model\Links;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class LinksController extends Controller
 {
@@ -17,7 +18,9 @@ class LinksController extends Controller
      */
     public function index()
     {
-        return view('admin.links.index',compact('links'));
+        $ob = DB::table('links');
+        $links = $ob->paginate(8); 
+        return view('admin.links.index',['links' => $links]);
     }
 
     /**
@@ -39,12 +42,10 @@ class LinksController extends Controller
     public function store(Request $request)
     {
         $input = $request->except('_token');
-
-        $re  = Links::create($input);
-        if($re){
-            return redirect('admin/links');
-        }else{
-            return back()->with('msg','添加失败');
+        //dd($input);
+        $id = DB::table('links')->insertGetId($input);
+        if ($id > 0) {
+            return redirect('admin/links')->with('msg','添加成功');
         }
     }
 
@@ -67,7 +68,8 @@ class LinksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $links = DB::table('links')->where('lid', $id)->first();
+        return view('admin.links.edit', ['links'=>$links]);
     }
 
     /**
@@ -79,7 +81,15 @@ class LinksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // echo 12321;
+        $data = $request->except('_token', '_method');
+         // dd($request->all());
+        $res = DB::table('links')->where('lid', $id)->update($data);
+        if($res > 0){
+            return redirect('admin/links')->with('msg', '修改成功');
+        }else{
+            return redirect('admin/links')->with('msg', '修改失败');
+        }
     }
 
     /**
@@ -90,6 +100,29 @@ class LinksController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $res = DB::table('links')->where('lid', $id)->delete();
+        if($res > 0){
+            return redirect('admin/links');
+        }else{
+            return redirect('admin/links');
+        }
+        
+        // ->with('msg', '删除失败')
+        // ->with('msg', '删除成功')
+        // $re =  Links::where('lid',$id)->delete();
+        // // 删除成功
+        // if($re){
+        //     $data = [
+        //         'status'=>0,
+        //         'msg'=>'删除成功',
+        //     ];
+        // }else{
+        //     $data = [
+        //         'status'=>1,
+        //         'msg'=>'删除失败',
+        //     ];
+        // }
+        // return $data;
+     }
+    
 }
