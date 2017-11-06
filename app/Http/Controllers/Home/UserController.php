@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class UserController extends Controller
 {
@@ -14,8 +15,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = DB::table('users')->get();
+        dd($user);
         return view('home.user.index');
     }
 
@@ -47,9 +50,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function comment(Request $request)
     {
-        //
+        return view('home.user.comment');
     }
 
 }

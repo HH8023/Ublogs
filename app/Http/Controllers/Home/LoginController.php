@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
         return view('home.login.register');
     }
-
+    // 前台验证码
     public function code(Request $request)
     {
         $input = $request->all();
@@ -47,7 +47,7 @@ class LoginController extends Controller
         session(['code'=>$code]);
         return 'ok';
     }
-
+    // 前台注册
     public function doRegister(Request $request)
     {
         $code = session('code');
@@ -76,6 +76,7 @@ class LoginController extends Controller
             return redirect('home/login')->with('msg','用户已注册，请登录');
         }
     }
+    // 前台登录
     public function doLogin(Request $request)
     {
 //        dd($request->all());
@@ -93,7 +94,7 @@ class LoginController extends Controller
             echo 12345;
         }
     }
-
+    // 退出登录
     public function doLogout(Request $request)
     {
         $request->session()->pull('tel');

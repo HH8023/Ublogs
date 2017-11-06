@@ -88,6 +88,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 	Route::get('home/user/password','Home\UserController@doPwd');
 	//             --我的文章
 	Route::get('home/user/article','Home\UserController@article');
+	//             --我的评论
+	Route::get('home/user/comment','Home\UserController@comment');
 
 // 前台群组路由   @张彦写的
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){

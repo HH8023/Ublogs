@@ -113,13 +113,13 @@
             <li class="person">
                 <ul>
                     <li><a href="{{ url('home/user') }}">个人中心</a></li>
-                    <li> <a href="{{ url('home/user/password') }}">修改密码</a></li>
+                    <li><a href="{{ url('home/user/password') }}">修改密码</a></li>
                 </ul>
             </li>
             <li class="person">
                 <ul>
-                    <li> <a href="{{ url('home/user/article') }}">我的文章</a></li>
-                    <li> <a href="reply.html">我的回复</a></li>
+                    <li><a href="{{ url('home/user/article') }}">我的文章</a></li>
+                    <li><a href="{{ url('home/user/comment') }}">我的评论</a></li>
                 </ul>
             </li>
             <li class="person">
