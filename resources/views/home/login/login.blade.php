@@ -78,7 +78,7 @@
                   <div class="forget-btn">
                     <a class="" data-toggle="dropdown" href="">登录遇到问题?</a>
                     <ul class="dropdown-menu">
-                      <li><a href="/users/password/mobile_reset">用手机号重置密码</a></li>
+                      <li><a href="{{url('home/dopass')}}">用手机号重置密码</a></li>
                     </ul>
                   </div>
                   <input type="submit" value="登录" class="sign-in-button" data-disable-with="登录" />

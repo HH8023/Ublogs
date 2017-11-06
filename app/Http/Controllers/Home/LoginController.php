@@ -52,6 +52,7 @@ class LoginController extends Controller
     {
         $code = session('code');
         $data = $request->all();
+//        dd($code);
         $tel = DB::table('users')->where('tel', $data['tel'])->first();
 //        dd($tel);
         if($tel == null){
@@ -61,7 +62,7 @@ class LoginController extends Controller
             }
             //去除token
             $data = $request->except('sms_code','_token');
-            //密码MD5加密
+            //密码加密
             $data['password'] = Crypt::encrypt($data['password']);
 //        dd($data);
             session()->pull('code');
@@ -70,7 +71,7 @@ class LoginController extends Controller
             //如果有id说明添加成功
             if($id > 0){
                 //跳转到/types路由，携带一个闪存
-                return redirect('home/login')->with('msg','注册成功，请登录');
+                return view('home/user',$data)->with('msg','注册成功，请完善个人信息');
             }
         }else{
             return redirect('home/login')->with('msg','用户已注册，请登录');
@@ -81,19 +82,58 @@ class LoginController extends Controller
     {
 //        dd($request->all());
         $data = $request->except('_token');
-        $tel = DB::table('users')->where('tel', $data['tel'])->first();
+        $tel = DB::table('user')->where('tel', $data['tel'])->first();
 //        dd($tel);
         if($tel == null){
             return redirect('home/register')->with('msg','无此用户，请先注册');
         }else{
+//            密码解密
             $pass = Crypt::decrypt($tel->password);
 //            dd($data['password']);
             if ($data['password'] !== $pass) {
                 return redirect('home/login')->with('msg','密码不正确');
             }
+            session(['tel'=>$tel]);
             echo 12345;
         }
     }
+    // 重置密码页
+    public function doPass()
+    {
+        return view('home.login.pass');
+    }
+
+    public function resetPass(Request $request)
+    {
+        $code = session('code');
+        $data = $request->all();
+//        dd($code);
+        $tel = DB::table('users')->where('tel', $data['tel'])->first();
+//        dd($tel);
+        if($tel !== null){
+//            dd($data);
+            if($data['sms_code'] != $code){
+                return redirect('home/dopass')->with('msg','验证码不正确');
+            }
+            //去除token
+            $data = $request->except('sms_code','_token');
+            //密码加密
+            $data['password'] = Crypt::encrypt($data['password']);
+//          dd($data);
+//            删除session里code
+            session()->pull('code');
+            //执行添加并且得到id
+            $res = DB::table('users')->where('tel', $data['tel'])->update($data);
+            //如果有res说明添加成功
+            if($res > 0){
+                //跳转到/types路由，携带一个闪存
+                return redirect('home/login')->with('msg','重置成功，请登录');
+            }
+        }else{
+            return redirect('home/register')->with('msg','用户未注册，请先注册');
+        }
+    }
+
     // 退出登录
     public function doLogout(Request $request)
     {

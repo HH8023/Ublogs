@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
 <!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
 <!--[if IE 8]><html class="ie ie8"><![endif]-->
@@ -50,9 +50,7 @@
     <div class="main">
       <h4 class="title">
         <div class="normal-title">
-          <a class="" href="{{url('home/login')}}">登录</a>
-          <b>·</b>
-          <a id="js-sign-up-btn" class="active" href="{{url('home/register')}}">注册</a>
+          <a id="js-sign-up-btn" class="active" href="{{url('home/register')}}">重置密码</a>
         </div>
       </h4>
       @if (session('msg'))
@@ -61,7 +59,7 @@
         </script>
       @endif
       <div class="js-sign-up-container">
-        <form class="new_user" id="new_user" action="{{url('home/doregister')}}" a0ccept-charset="UTF-8" method="post">
+        <form class="new_user" id="new_user" action="{{url('home/resetpass')}}" a0ccept-charset="UTF-8" method="post">
             {{ csrf_field() }}
             <div class="input-prepend restyle no-radius js-normal">
                 <input placeholder="手机号" type="tel" name="tel" id="phone" />
@@ -77,11 +75,10 @@
             {{--<button type="button" onclick="code()" class="sign-up-button"/>手机验证码</button>--}}
 
           <div class="input-prepend">
-              <input placeholder="设置密码" type="password" name="password" id="password" />
+              <input placeholder="请输入新密码" type="password" name="password" id="password" />
               <i class="iconfont ic-password"></i>
           </div>
-          <input type="submit" value="注册" class="sign-up-button" data-disable-with="注册" />
-          <p class="sign-up-msg">点击 “注册” 即表示您同意并愿意遵守简书<br> <a target="_blank" href="http://www.jianshu.com/p/c44d171298ce">用户协议</a> 和 <a target="_blank" href="http://www.jianshu.com/p/2ov8x3">隐私政策</a> 。</p>
+          <input type="submit" value="重置" class="sign-up-button" data-disable-with="重置" />
         </form>
     <!-- 更多注册方式 -->
       </div>
@@ -121,7 +118,7 @@
                   data: {phone: phone},
                   success: function (data) {
                       if (data == 'ok') {
-                          alert('请在5分钟内完成注册');
+                          alert('请在5分钟内完成重置密码');
                       }
                   }
               })
