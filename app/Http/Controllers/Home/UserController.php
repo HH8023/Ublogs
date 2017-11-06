@@ -30,8 +30,10 @@ class UserController extends Controller
      */
     public function doPwd()
     {
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
         // echo 1234543;
-        return view('home.user.password');
+        return view('home.user.password',compact('configs','links'));
     }
 
     /**
@@ -42,7 +44,9 @@ class UserController extends Controller
      */
     public function article(Request $request)
     {
-        return view('home.user.article');
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        return view('home.user.article',compact('configs','links'));
     }
 
     /**
@@ -53,7 +57,9 @@ class UserController extends Controller
      */
     public function comment(Request $request)
     {
-        return view('home.user.comment');
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        return view('home.user.comment',compact('configs','links'));
     }
 
 }

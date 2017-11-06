@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\Config;
-use App\Http\Controllers\Admin\Links;
-use App\Http\Controllers\Admin\Subject;
-use App\Http\Controllers\Admin\Advert;
-use App\Http\Controllers\Admin\Artical_list;
-use App\Http\Controllers\Admin\User;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
@@ -48,13 +43,14 @@ class IndexController extends Controller
     {
         $configs = DB::table('configs')->get();
         $links = DB::table('links')->get();
+        $advert = DB::table('advert')->get();
         $input = $request->input('keywords')?$request->input('keywords'):'s';
         $artical_list = DB::table('artical_list')->where('title','like','%'.$input.'%')
         ->join('artical_detail','artical_list.id','=','artical_detail.art_id')
         ->select('artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id','artical_detail.art_synopsis','artical_list.user_id')->get();
         // dd($artical_list);
         $user_infos = DB::table('user_infos')->get();
-        return view('home.search',compact('artical_list','artical_detail','configs','user_infos','links'));
+        return view('home.search',compact('artical_list','artical_detail','configs','user_infos','links','advert'));
     }
 
     /**

@@ -16,7 +16,8 @@ class AdvertisingController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->all());
+        // 显示广告首页
+       
        
          $where = [];
         $ob = DB::table('advert');
@@ -31,16 +32,9 @@ class AdvertisingController extends Controller
         }
 
 
-        $list = $ob->paginate(5);
+        $list = $ob->paginate(3);
         return view('admin.advert.advertising', ['adve' => $list,'where'=>$where]);
 
-
-
-        // $uid=$request->get('ad_id');
-
-        // $uid = DB::table('advert')->where('cid','like', '%'.$uid.'%')->get();
-
-        // return view('admin.advert.advertising', ['adve' => $uid]);
     }
 
     /**
@@ -48,9 +42,10 @@ class AdvertisingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        // return 11111111;
+        
+        // 显示添加页面
          return view('admin.advert.add');
         
     }
@@ -63,18 +58,32 @@ class AdvertisingController extends Controller
      */
     public function store(Request $request)
     {
-            // dd($request->all());
-        // $users = DB::table('advert')->select('state', 'start_time as open')->get();
-        // dd($users);
-            $input=$request->except('_token','query_string');
-            // 执行添加并且得到id
-            $id = DB::table('advert')->insertGetId($input);
-            //如果有id说明添加成功
-            if($id > 0){
-                //跳转到admin/advert路由，携带一个闪存
+           
+              if($request->file('ad_image')){
+                $input=$request->except('_token');
+                  // dd($input);
+                //获取图片
+                $pic = $input['ad_image'];
+                  // dd($pic);
+                //文件的后缀名
+                $clientName = $pic -> getClientOriginalExtension();
+                  // dd($clientName);
+                //图片的存放的地址
+                $path = 'admin/img/';
+                //
+                $filename = time().rand(1000, 9999).".".$clientName;
+                $avatar = $path.$filename;
+                // dd($avatar);
+                $pic->move($path,$filename);
+                //添加数据库
+                $id = DB::table('advert')->insertGetId($input);
+              //如果有id说明添加成功
+             
+               if($id > 0){
+                    //跳转到admin/advert路由，携带一个闪存
                 return redirect('admin/advert')->with('msg','添加成功');
-            } 
-
+                } 
+             } 
           
     }
 
@@ -99,7 +108,7 @@ class AdvertisingController extends Controller
      public function edit($id)
      {  
          
-       
+          //显示修改页面
          $user = DB::table('advert')->where('ad_id', $id)->first();
           // dd($user);
           return view('admin/advert/update',['adve'=>$user]);    
@@ -113,11 +122,20 @@ class AdvertisingController extends Controller
      */
      public function update(Request $request, $id)
      {
+           
 
-        
-          $data = $request->except('_token','_method','query_string');
+
+         
+          //执行修改
+         
+              // echo 111111111;
+                // $input=$request->except('_token');
+        $data = $request->except('_token','_method','query_string');
           
-         $res = DB::table('advert')->where('ad_id', $id)->update($data);
+
+
+
+        $res = DB::table('advert')->where('ad_id', $id)->update($data);
 
          // dd($res);
          if($res > 0){
@@ -125,6 +143,13 @@ class AdvertisingController extends Controller
          }else{
         return redirect('admin/advert')->with('msg', '修改失败(或者并未修改)');
          }
+
+      
+
+          // 
+          // $data = $request->except('_token','_method','query_string');
+          
+      
      
      }
 
@@ -136,7 +161,7 @@ class AdvertisingController extends Controller
       */
      public function destroy($id)
      {
-          // return 11111;
+          // 删除
         
          $re = DB::table('advert')->where('ad_id', $id)->delete();
         

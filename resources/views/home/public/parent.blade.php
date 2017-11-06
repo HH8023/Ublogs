@@ -6,6 +6,9 @@
 <!--[if !IE]><!--> <html> <!--<![endif]-->
 
 <head>
+  <style type="text/css">
+    #fa{position:relative;left:375px;top:15px;}
+  </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
@@ -39,7 +42,11 @@
     @endforeach
   <meta name="csrf-param" content="authenticity_token" />
 <meta name="csrf-token" content="AMg+PRAXcTf7a3btdssPEB45SNQxmLLbNsOqeNpEV7u+2waHgabTf8PynatBb+jJVqqoWzWfU558leBQ3lqWJw==" />
-
+<!-- 后加的 -->
+<link rel="stylesheet" media="all" href="{{ asset('home/css/web-b6ffb2ef57d077ea3cf8.css')}}" />
+<link rel="stylesheet" media="all" href="{{ asset('home/css/entry-fda619782cb1647902e3.css')}}" />
+  <link rel="stylesheet" media="all" href="{{ asset('home/css/web-096a5331e66d587e2ffe.css') }}" />
+  <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-11a4d1a2fd357ffdf4dd.css') }}" />
   <link rel="stylesheet" media="all" href="{{ asset('home/css/web-b6ffb2ef57d077ea3cf8_6.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{ asset('home/AmazeUI-2.4.2/assets/css/admin.css') }}" />
   <link  rel="stylesheet" type="text/css" href="{{ asset('home/AmazeUI-2.4.2/assets/css/amazeui.css') }}" />
@@ -61,16 +68,6 @@
   ga('create', 'UA-35169517-1', 'auto');
   ga('send', 'pageview');
 </script>
-
-<!-- <script>
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
-</script> -->
 
   <!-- End of 访问统计 -->
 </head>
@@ -136,7 +133,7 @@
 
             <!-- 右上角 -->
             <!-- 登录显示写文章 -->
-            <a class="btn write-btn" target="_blank" href="{{ url('/home/article/add') }}"><i class="iconfont ic-write"></i>写文章</a>
+            <a class="btn write-btn" href="{{ url('/home/edit') }}"><i class="iconfont ic-write"></i>写文章</a>
             <!-- 如果用户登录，显示下拉菜单 -->
             <div class="user">
                 <div data-hover="dropdown">

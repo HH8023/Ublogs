@@ -32,7 +32,7 @@
                          
                             <div class="widget-body am-fr">
 
-                                <form action="{{ url('admin/advert')}}" class="am-form tpl-form-line-form" method='post'>
+                                <form action="{{ url('admin/advert')}}" class="am-form tpl-form-line-form"  enctype="multipart/form-data" method='post'>
                                         {{ csrf_field() }}
                                         <div class="am-form-group">
                                         <label for="user-phone" class="am-u-sm-3 am-form-label">作者 <span class="tpl-form-line-small-title">Author</span></label>
@@ -57,7 +57,7 @@
                                         <div class="am-u-sm-9">
                                              <div class="result_wrap">
                                                 <ul class="list_btn">
-                                                    <li><input name="ad_image" type="file"> <span onclick="pic_minus(this)"><i class="fa fa-minus-circle"></i></span></li>
+                                                    <li><input name="ad_image" type="file" style="width:280px"> <span onclick="pic_minus(this)"><i class="fa fa-minus-circle"></i></span></li>
                                                 </ul>
                                             </div>
 
@@ -75,8 +75,8 @@
                                     <div class="am-form-group">
                                         <label for="user-name" class="am-u-sm-3 am-form-label">状态 <span class="tpl-form-line-small-title">Title</span></label>
                                          <div class="am-u-sm-9">
-                                            <input type="radio" name="ad_state" value='开启'>开启
-                                            <input type="radio" name="ad_state" value='关闭'>关闭
+                                            <input type="radio" name="ad_state" value='1'>开启
+                                            <input type="radio" name="ad_state" value='0'>关闭
                                             <!-- <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入标题文字" name="state"> -->
                                          
                                         </div>

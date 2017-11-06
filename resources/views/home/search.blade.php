@@ -2,7 +2,27 @@
 
 @section('content')
 
-<div class="aside">
+<div class="container search">
+    <div class="row">
+    <div class="aside">
+    	@foreach($advert as $v)
+        <div class="board">
+            <a target="_blank" href="/recommendations/notes?category_id=56&amp;utm_medium=index-banner-s&amp;utm_source=desktop"><img src="{{ url('./image/'.$v->ad_image) }}"></a>
+                   
+        </div> 
+        <div class="jianshu-daily">
+            <div class="title">
+            广告区域
+                <a target="_blank" href=""></a>
+            </div>
+            <a target="_blank" class="note" href="welcome.php">
+                <img src="{{ url('./image/'.$v->ad_image) }}" alt="96" />
+                <div class="note-title">{{ $v->ad_title }}</div>
+            </a>                    
+        </div>
+        @endforeach 
+        <div data-vcomp="recommended-author-list"></div>
+    </div> 
     <div class="col-xs-16 col-xs-offset-8 main">
         <div class="top">
             <div class="relevant">
@@ -39,19 +59,19 @@
                         @endforeach 
                     </div>
                 </li>
-            </ul> <!----> <!----> <!----> 
+            </ul>
             <div>
-                <ul class="pagination"><!---->  
-                    <li><a href="" class="active">1</a></li> 
+                <ul class="pagination">
+                    <!-- <li><a href="" class="active">1</a></li> 
                     <li><a>2</a></li>
                     <li><a>3</a></li>
                     <li><a>4</a></li> 
-                    <li><a>下一页</a></li>
+                    <li><a>下一页</a></li> -->
                 </ul>
             </div>
         </div>
     </div>
+    </div>
 </div>
-
 
     @endsection

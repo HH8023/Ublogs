@@ -47,7 +47,7 @@
                             <span class="time" data-shared-at="{{ $us->add_time }}"></span>
                         </div>
                     </div>
-                    <a class="title" target="_blank" href="{{ url('home/details/'.$art->art_id)}}">{{ $us->title }}</a>
+                    <a class="title" href="{{ url('home/details/'.$art->art_id)}}">{{ $us->title }}</a>
                     <p class="abstract">{{ $art->content }} </p>     
                     <div class="meta">
                         <!-- <a class="collection-tag" target="_blank"></a> -->
