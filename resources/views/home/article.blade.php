@@ -151,7 +151,7 @@
 
         </div>
         <div class="info">
-          收录了126214篇文章 · 1296897人关注
+          收录了{{ $title->count() }}篇文章 · 1296897人关注
         </div>
       </div>
       <ul class="trigger-menu" data-pjax-container="#list-container"><li class=""></li><li class="active"><a href="/c/RfYyQj?order_by=added_at"><i class="iconfont ic-articles"></i> 最新收录</a></li><li class=""></li></ul>

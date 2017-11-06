@@ -51,18 +51,19 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        
          //查找栏目的id
         $pro = Subject::where('id',$id)->first();
         //从栏目的id绑定文章的id
-        $title = Artcal_list::where('pro_id',$pro->id)->get();
+        $title = Artcal_list::orderBy('id','desc')->where('pro_id',$pro->id)->where('status', 0)->get();
         //获取文章内容表遍历到页面
-        $aid= Artcal_detail::orderBy('id','desc')->get();
+        $aid= Artcal_detail::get();
         //获取用户的信息
         // dd($aid);
         $uid = UserInfo::get();
         // //用户关注表
-
+        
         // $att = Attentions::get();
 
         return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid]);

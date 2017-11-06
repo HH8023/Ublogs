@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Artcal_list;
 use App\Http\Models\Artcal_detail;
-
+use App\Http\Models\UserInfo;
 use App\Http\Models\Subject;
 use Illuminate\Support\Facades\Input;
 use DB;
@@ -36,20 +36,19 @@ class ArticleController extends Controller
 
         //栏目列表,并获取栏目传过来的id
         $pro = Subject::get();
-        $info = $request->input('pid')?$request->input('pid'):'';;
-        
+        $info = $request->input('pid')?$request->input('pid'):'';;       
         //文章列表,并获取栏目传过来的name进行搜索
-        $art = Artcal_list::get();
+        $art = Artcal_list::get();       
+        $input = $request->input('name')?$request->input('name'):''; 
 
-        $input = $request->input('name')?$request->input('name'):'';   
-        
+        $user = UserInfo::get();
         if ($info) {
             $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->where('pro_id',$info)->paginate(5);
         }else{
             $title = Artcal_list::orderBy('id','desc')->where('status',0)->where('title','like','%'.$input.'%')->paginate(5);
         }
 
-        return view('admin.article.index',compact('title','input','pro'));
+        return view('admin.article.index',compact('title','input','pro','user'));
 
     }
 
