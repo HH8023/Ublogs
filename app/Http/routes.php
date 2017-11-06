@@ -20,8 +20,8 @@ Route::get('admin/login', 'Admin\LoginController@index');
 Route::post('admin/doLogin', 'Admin\LoginController@doLogin');
 Route::get('admin/logout', 'Admin\LoginController@doLogout');
 
-// 后台路由群组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']], function (){
+// 后台路由群组										,'middleware' => ['isLogin']
+Route::group(['prefix'=>'admin','namespace'=>'Admin'], function (){
 
 	// 后台首页路由
 	Route::get('index','IndexController@index');
@@ -78,6 +78,7 @@ Route::post('home/dologin','Home\LoginController@doLogin');
 
 // 前台路由群组
 Route::get('/home/index','Home\IndexController@index');
+Route::get('/home/search','Home\IndexController@search');
 //前台列表页路由
 Route::get('/article','Home\IndexController@list');
 Route::get('/article/{id}','Home\IndexController@article');
@@ -88,7 +89,7 @@ Route::get('/article/{id}','Home\IndexController@article');
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
 
 //详情
-Route::get('datails','DatailsController@index');
+Route::get('details/{id}','DetailsController@index');
 
 
 });

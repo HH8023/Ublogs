@@ -7,23 +7,32 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
-class DatailsController extends Controller
+class DetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($id)
     {   
-
-         //获取详情列表库
-        $ob = DB::table('artical_datails')->get();
-        //获取文章列表库
-        
-        $list = DB::table('artical_lists')->get();
+          // echo 1111111;
+        //  //获取详情列表库
+        //  $ob = DB::table('artical_detail')->get();
+        // //获取文章列表库
+        // // dd($ob);
+        //  $list = DB::table('artical_list')->get();
         // dd($list);       
-        return view('home.datails',['data'=>$ob,'list'=>$list]);
+        // return view('home.details',['data'=>$ob,'list'=>$list]);
+        
+        $user = DB::table('user_infos')
+         ->join('artical_list','user_infos.uid','=','artical_list.user_id')
+         ->select('user_infos.nickname','user_infos.photo','artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id')->first();
+         // dd($user);
+         // $rtical_list = DB::table('artical_list')->get();
+         $artical_detail = DB::table('artical_detail')->first();
+        // dd($artical_detail);
+        return view('home.details',compact('user','artical_detail'));
 
     }
     

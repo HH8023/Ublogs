@@ -275,7 +275,7 @@
                         </li>
 
                         <li class="sidebar-nav-link">
-                            <a href="{{ url('admin/links/add') }}">
+                            <a href="{{ url('admin/links/create') }}">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 增加链接
                             </a>
                         </li>

@@ -158,9 +158,9 @@
   <div class="post">
     <div class="article">
 
-          @foreach($data as $v)
-        <h1 class="title">{{ $v->art_synopsis}}</h1>
-          @endforeach
+          
+        <h1 class="title">{{ $user->title}}</h1>
+         
         <!-- 作者区域 -->
         <div class="author">
           <a class="avatar" href="/u/9ade34a08a3f">
@@ -168,9 +168,9 @@
             <img src="picture/ca521dfa44ce.jpeg" alt="96" /></a>  
 
         <div class="info">
-           @foreach($data as $v)
-            <span class="name"><a href="/u/9ade34a08a3f">{{ $v->uid}}</a></span>
-             @endforeach
+         
+            <span class="name"><a href="/u/9ade34a08a3f">{{ $user->nickname}}</a></span>
+            
               <img class="badge-icon" data-toggle="tooltip" title="简书签约作者" src="{{ asset('home/picture/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png')}}" alt="Signed" />
             <!-- 关注用户按钮 -->
             <div props-data-classes="user-follow-button-header" data-author-follow-button></div>

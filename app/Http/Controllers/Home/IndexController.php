@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\Config;
+use App\Http\Controllers\Admin\Links;
+use App\Http\Controllers\Admin\Subject;
+use App\Http\Controllers\Admin\Advert;
+use App\Http\Controllers\Admin\Artical_list;
+use App\Http\Controllers\Admin\User;
 use App\Http\Requests;
-use App\Http\Models\Artcal_list;
-use App\Http\Models\Artcal_detail;
-use App\Http\Models\Subject;
-use App\Http\Models\UserInfo;
 use App\Http\Controllers\Controller;
 use DB;
-
+use Session;
 class IndexController extends Controller
 {
     /**
@@ -18,11 +20,23 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        // echo 1111;
-        return view('home.index');
+    public function index(Request $request)
+    {   
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        $subject = DB::table('subject')->get();
+        $advert = DB::table('advert')->get();
+
+        // session(['tel'=>'12345']);
+        // $tel = session()->pull('tel');
+        // dd($tel);
+        $user = DB::table('user_infos')
+        ->join('artical_list','user_infos.uid','=','artical_list.user_id')
+        ->select('user_infos.nickname','user_infos.photo','artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id')->get();
+         // $rtical_list = DB::table('artical_list')->get();
+         $artical_detail = DB::table('artical_detail')->get();
+        
+        return view('home.index',compact('user','artical_detail','configs','links','subject','advert'));
     }
 
     /**
@@ -30,19 +44,17 @@ class IndexController extends Controller
      *  列表页对应的控制器方法
      * @return \Illuminate\Http\Response
      */
-    public function article($id)
-    {    
-
-        $pro = Subject::where('id',$id)->first();
-        // $pro = DB::table('subject')->where('id', $id)->first();
-        $title = Artcal_list::where('pro_id',$pro->id)->get();
-       
-        $aid= Artcal_detail::get();
-
-        $uid = UserInfo::get();
-       
-
-        return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid]);
+    public function search(request $request)
+    {
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        $input = $request->input('keywords')?$request->input('keywords'):'s';
+        $artical_list = DB::table('artical_list')->where('title','like','%'.$input.'%')
+        ->join('artical_detail','artical_list.id','=','artical_detail.art_id')
+        ->select('artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id','artical_detail.art_synopsis','artical_list.user_id')->get();
+        // dd($artical_list);
+        $user_infos = DB::table('user_infos')->get();
+        return view('home.search',compact('artical_list','artical_detail','configs','user_infos','links'));
     }
 
     /**
@@ -51,16 +63,11 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function list()
-    // {
-    //     //
-    //     $aid= Artcal_detail::get();
-    //     $title = Artcal_list::get();
-    //     $pro = Subject::get();;
-    //     // 查看detail表内容
-        
-    //     return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro]);
-    // }
+    public function article($id)
+    {
+        //
+        echo 3333;
+    }
 
    
 }
