@@ -205,9 +205,10 @@
       <div class="icp">
         ©2012-2017 Ublog信息科技有限公司 / Ublog / 京ICP备1101XXXX号-X /  <a href="" style="color:blue;"></a>
       <div class="icp" >
-        @foreach($configs as $v)
-          <a href="" style="color:blue;">友情链接:
-                    {{ $v->conf_copyright }}
+        
+          友情链接:
+          @foreach($links as $v)
+                    <a href="" style="color:blue;">{{ $v->link_title }}
                  </a><em> · </em>
         @endforeach
         <br>

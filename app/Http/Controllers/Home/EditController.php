@@ -50,7 +50,7 @@ class EditController extends Controller
                 $picname = time().rand(1000,9999).'.'.$ext;
                 //dd($picname);
                  // 另存为
-                $file->move('./home/upload',$picname);
+                $file->move('./uploads',$picname);
                 // dd($file);
 
                 if($file->getError()>0){
@@ -66,7 +66,8 @@ class EditController extends Controller
 // 　　  
         // dd($li);
         $data = $request->except('content','art_synopsis','_token');
-        $data['photo'] = $picname;
+        $data['photo'] = 'uploads/'.$picname;
+        // dd($data);
         //把用户放到列表
         $data['user_id'] = $uid;
         // dd($data);
