@@ -72,26 +72,19 @@
                 <div class="am-form-group">
                     <label for="user-intro" class="am-u-sm-12 am-form-label  am-text-left">文章内容</label>
                     <div class="am-u-sm-12 am-margin-top-xs ">
-                        <!-- <textarea name="content" class="" rows="10" id="user-intro" placeholder="请输入文章内容"></textarea> -->
-
-                        <script type="text/javascript" charset="utf-8" src="{{ asset('utf8-php\ueditor.config.js') }}"></script>
-                        <script type="text/javascript" charset="utf-8" src="{{ asset('utf8-php\ueditor.all.min.js') }}"> </script>
+                        <script type="text/javascript" charset="utf-8" src="{{ asset('utf8-php/ueditor.config.js') }}"></script>
+                        <script type="text/javascript" charset="utf-8" src="{{ asset('utf8-php/ueditor.all.min.js') }}"> </script>
                         <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
                         <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-                        <script type="text/javascript" charset="utf-8" src="{{ asset('utf8-php\lang/zh-cn/zh-cn.js') }}"></script>
+                        <script type="text/javascript" charset="utf-8" src="{{ asset('utf8-php/lang/zh-cn/zh-cn.js') }}"></script>
 
-                        <script id="editor" name="content" type="text/plain" style="..."></script>
-                        <script>
-                            var ue = UE.getEditor('editor');
-                        </script>
+                        <script id="editor"  name="content" type="text/plain"></script>
                     </div>
                 </div>
-                <input type="hidden" name="status" value="1">
-                
-
-                <div class="am-form-group">
+                <div class="am-form-group" id="btn"> 
                     <div class="am-u-sm-12 am-u-sm-push-12">
-                        <input type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success " value="提交">
+                        <input type="submit"  class="am-btn am-btn-primary tpl-btn-bg-color-success "   value="提交">
+                       <!--  onclick="getPlainTxt()" -->
                     </div>
                 </div>
             </form>
@@ -99,6 +92,23 @@
     </div>
 </div>
 <script>
+    var ue = UE.getEditor("editor");
+// function getPlainTxt() {
+//         $.ajax({
+//             url:'admin/article/',
+//             type:'post',
+//             async:true,
+//             date:{'_method':'content','_token':"{{csrf_token()}}"},
+//             dateType:'json',               
+//             success:function(data){      
+//                 alert(UE.getEditor('editor').getPlainTxt());
+//             }, 
+//             error:function(data){
+//                 layer.alert("添加失败");
+//             }
+//         })
+//     }
+
     $(function () {
         $("#file_upload").change(function () {
             uploadImage();

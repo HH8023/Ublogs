@@ -104,13 +104,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 
 	//前台列表页路由
 	Route::resource('home/article','Home\ArticleController');
+	Route::get('home/details/{id}','Home\ArticleController@details');
 
 
 // 前台群组路由   @张彦写的
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
 
 	//详情
-	Route::get('details/{id}','DetailsController@show');
+	// Route::get('details/{id}','DetailsController@show');
 	Route::get('comment','DetailsController@show');
 
 	//编辑

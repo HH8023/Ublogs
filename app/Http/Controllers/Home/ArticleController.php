@@ -12,7 +12,22 @@ use App\Http\Models\Attentions;
 use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
-{
+{   
+    public function details($id)
+    {   
+
+        //从栏目的id绑定文章的id
+        $art = Artcal_list::where('id',$id)->get();
+        //获取文章内容表遍历到页面
+        $det= Artcal_detail::where('art_id',$id)->get();
+        //获取用户的信息
+        $uid = UserInfo::get();
+        // //用户关注表
+        
+        // $att = Attentions::get();
+
+        return view('home.details',['art' => $art,'det'=>$det,'uid' => $uid]);
+    }
     /**
      * Display a listing of the resource.
      *

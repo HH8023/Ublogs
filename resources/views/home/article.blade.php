@@ -178,7 +178,7 @@
     </div>   
      @endif
     @endforeach
-    <a class="title" target="_blank" href="{{ url('home/details')}}">{{ $a->title }}</a>
+    <a class="title" target="_blank" href="{{ url('home/details/'.$a->id)}}">{{ $a->title }}</a>
    @foreach ($aid as $b)
    @if( $a->id == $b->art_id)
     <p class="abstract">
