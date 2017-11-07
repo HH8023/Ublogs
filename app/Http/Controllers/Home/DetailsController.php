@@ -19,7 +19,7 @@ class DetailsController extends Controller
     {
         $configs = DB::table('configs')->get();
         $links = DB::table('links')->get();
-       
+        
          $comm = $request->all();
         // dd($comm);
         $user = DB::table('user_infos')

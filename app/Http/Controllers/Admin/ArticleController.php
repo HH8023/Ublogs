@@ -72,6 +72,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {   
+        // dd($_POST['content']);
+        // echo json_encode($list);
         //去除令牌
         $input = $request->except('_token');
         $add = new Artcal_list;

@@ -14,7 +14,7 @@
                 <div class="am-form-group">
                     <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">标题 <span class="tpl-form-line-small-title">Title</span></label>
                     <div class="am-u-sm-12">
-                        <input type="text" class="tpl-form-input am-margin-top-xs" id="user-name" placeholder="{{ $title->title }}">
+                        <input type="text" class="tpl-form-input am-margin-top-xs" id="user-name" placeholder="{{ $title->title }}" disabled="">
                         <small>请填写标题文字10-20字左右。</small>
                     </div>
                 </div>
@@ -28,13 +28,13 @@
                 <div class="am-form-group">
                     <label for="user-phone" class="am-u-sm-12 am-form-label am-text-left">作者 <span class="tpl-form-line-small-title">Author</span></label>
                     <div class="am-u-sm-12  am-margin-top-xs">
-                       <input type="text" class="am-margin-top-xs" placeholder="{{ $title->user_id }}"> 
+                       <input type="text" class="am-margin-top-xs" placeholder="{{ $title->user_id }}" disabled=""> 
                     </div>
                 </div>
                 <div class="am-form-group">
                     <label for="user-intro" class="am-u-sm-12 am-form-label  am-text-left">文章内容</label>
                     <div class="am-u-sm-12 am-margin-top-xs">
-                        <textarea class="" rows="10" id="user-intro" placeholder="{{ $aid-> content }}"></textarea>
+                        <textarea class="" rows="10" id="user-intro" placeholder="{{ $aid-> content }}" ></textarea>
                     </div>
                 </div>
                 <div class="am-form-group">

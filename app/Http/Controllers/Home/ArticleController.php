@@ -10,9 +10,29 @@ use App\Http\Models\Subject;
 use App\Http\Models\UserInfo;
 use App\Http\Models\Attentions;
 use App\Http\Controllers\Controller;
+use DB;
 
 class ArticleController extends Controller
-{
+{   
+    public function details($id)
+    {   
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        // dd($links);
+        //从栏目的id绑定文章的id
+        $art = Artcal_list::where('id',$id)->get();
+        //获取文章内容表遍历到页面
+        $det= Artcal_detail::where('art_id',$id)->get();
+        //获取用户的信息
+        $uid = UserInfo::get();
+        // //用户关注表
+        // dd($art);
+        // $att = Attentions::get();
+
+        // return view('home.details',['art' => $art,'det'=>$det,'uid' => $uid],compact('configs','links'));
+        return view('home.details',compact('configs','links','art','det','uid'));
+
+    }
     /**
      * Display the specified resource.
      *
@@ -21,7 +41,11 @@ class ArticleController extends Controller
      */
     public function show($id)
     {   
-        
+        $configs = DB::table('configs')->get();
+        $links = DB::table('links')->get();
+        $uid = session()->get('tel');
+        $uid = $uid->uid;
+        $users = DB::table('user_infos')->where('uid',$uid)->first();
          //查找栏目的id
         $pro = Subject::where('id',$id)->first();
         //从栏目的id绑定文章的id
@@ -35,7 +59,7 @@ class ArticleController extends Controller
         
         // $att = Attentions::get();
 
-        return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid]);
+        return view('home.article',['title' => $title,'aid'=>$aid, 'pro'=>$pro,'uid' => $uid,'configs'=>$configs,'links'=>$links,'users'=>$users]);
     }
 
 

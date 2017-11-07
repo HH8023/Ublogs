@@ -126,7 +126,6 @@
   </div>
 </nav>
     @else
-  
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="width-limit">
             <!-- 左上方 Logo -->
