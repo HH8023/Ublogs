@@ -6,26 +6,26 @@
  <div class="note">
   <div class="post">
     <div class="article">
-       
-        <h1 class="title">{{ $user->title }}</h1>
-        
+       @foreach($user as $v)
+        <h1 class="title">{{ $v->title}}</h1>
+        @endforeach
         <!-- 作者区域 -->
         <div class="author">
             
           <a class="avatar" href="/u/9ade34a08a3f">
             
 
-            <img src="{{ asset('home/img/upload/'.$user->photo)}}" alt="96" />
+            <img src="" alt="96" />
            
 </a>          <div class="info">
-            <span class="name"><a href="/u/9ade34a08a3f">{{$user->nickname}}</a></span>
+            <span class="name"><a href="/u/9ade34a08a3f">3333333</a></span>
               <img class="badge-icon" data-toggle="tooltip" title="简书签约作者" src="{{ asset('home/picture/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png')}}" alt="Signed" />
             <!-- 关注用户按钮 -->
             <div props-data-classes="user-follow-button-header" data-author-follow-button></div>
             <!-- 文章数据信息 -->
             <div class="meta">
               <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
-                <span class="publish-time">{{ $user->add_time }}</span>
+                <span class="publish-time">4444444444</span>
             </div>
           </div>
           <!-- 如果是当前作者，加入编辑按钮 -->
@@ -36,10 +36,10 @@
         <div data-note-content class="show-content">
           <div class="image-package">
          
-            <img src="{{ asset('home/upload/'.$user->photo)}}">
+            <img src="">
            
             <br><div class="image-caption">星空宇宙</div>
-          </div><p>{{ $artical_detail->content }}</p>
+          </div><p>3333333333</p>
 
         </div>
         <!--  -->
@@ -61,9 +61,9 @@
       <div class="follow-detail">
         <div class="info">
           <a class="avatar" href="/u/9ade34a08a3f">
-            <img src="{{ asset('home/img/upload/'.$user->photo)}}" alt="96" />
+            <img src="" alt="96" />
 </a>          <div props-data-classes="user-follow-button-footer" data-author-follow-button></div>
-          <a class="title" href="/u/9ade34a08a3f">{{ $user->nickname}}</a>
+          <a class="title" href="/u/9ade34a08a3f">5555555555</a>
           <img class="badge-icon" data-toggle="tooltip" title="简书签约作者" src="{{ asset('home/picture/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png')}}" alt="Signed" />
         </div>
           <div class="signature">情归教育的化学人，查理芒格主义的实践者</div>
@@ -91,11 +91,13 @@
 
           </ul>
         '>更多分享</a>
-
+           
       
       </div>
     </div>
+
  <!--评论  -->
+ <input type="hidden" name="c_time" value="{{ date('Y-m-d H:i:s') }}">
  <style type="text/css">
    .input{left:500px;}
 </style>

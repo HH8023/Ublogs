@@ -110,8 +110,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 Route::group(['prefix'=>'home','namespace'=>'Home'], function (){
 
 	//详情
-	Route::get('details/{id}','DetailsController@show');
-	Route::get('comment','DetailsController@show');
+	// Route::get('details/{id}','DetailsController@show');
+	Route::post('comment/{id}','DetailsController@show');
 
 	//编辑
 	Route::get('edit','EditController@create');

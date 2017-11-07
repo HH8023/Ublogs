@@ -2,9 +2,16 @@
  <html> 
 <head>
   <meta charset="utf-8">
+  <style type="text/css">
+   #dv{width:2000px;height:655px;position:absolute;top:0px;left:0px;}
+   
+ </style>
 </head>
 <body>
-
+   <div id="dv">
+   <img src="{{ asset('home/img/qq.jpg')}}" style="width:2000px;height:655px;">
+   </div>
+ 
   <link rel="stylesheet" media="all" href="{{ asset('home/css/web-b6ffb2ef57d077ea3cf8_6.css') }}" />
   
   <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-568c39093a4cda20e253_1.css') }}" />
@@ -16,11 +23,14 @@
 <script src="js/web-06eafca9d97868f774e0_5.js" crossorigin="anonymous"></script>
     
     <script src="js/entry-bc590a7721c32bb9089a_1.js" crossorigin="anonymous"></script>
+
+
+   
   <!--  --> 
   <div class="collapse navbar-collapse" id="menu">
         <ul class="nav navbar-nav">
             <li class="active">
-              <a href="{{ url('/home/index') }}">
+              <a href="{{ url('/home/index') }}" style="left:240px">
                 <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
               </a>            
             </li>
@@ -35,8 +45,8 @@
       @endif
 
    
-   <div class="widget-body am-fr">
-   <form action="{{ url('home/add') }}" method='post' class="am-form tpl-form-border-form" enctype="multipart/form-data">
+   <div id="widget">
+   <form action="{{ url('home/add') }}" method='post' class="am-form tpl-form-border-form" enctype="multipart/form-data" style="width:500px;position:relative;left:270px">
      {{ csrf_field() }}
    <!-- 图片 -->
       
@@ -50,14 +60,22 @@
           </div>
       </div>
     <!--  -->
-  
+    <input type="hidden" name="add_time" value="{{ date('Y-m-d H:i:s') }}">
    <!--  -->
-    栏　　目:<input type="text" style="width:500px;height:30px" placeholder="栏目" name="pro_id"><br><br>
+  <!--   栏　　目:<input type="text" style="width:500px;height:30px;" placeholder="栏目" name="pro_id"><br><br> -->
+    <div class='medio-body'>
+      栏　　目:<select class='form-control m-b-10' name="pro_id" id="" style="width:500px;height:30px;">
+            <option value=''>--请选择--</option>
+            <option  value="1">IT</option>
+            <option  value="2">古典</option>
+        </select>
+    </div><br><br>
+    
     <!--  -->
-    文章简介:<input type="text" style="width:500px;height:30px" placeholder="文章简介" name="art_synopsis"><br><br>
+    文章简介:<input type="text" style="width:500px;height:30px;" placeholder="文章简介" name="art_synopsis" style="background:EBF7F8"><br><br>
 
 
-      标　　题:<input type="text" style="width:500px;height:30px" placeholder="标题" name="title">
+      标　　题:<input type="text" style="width:500px;height:30px;" placeholder="标题" name="title">
 
                 
                 <div class="am-form-group">

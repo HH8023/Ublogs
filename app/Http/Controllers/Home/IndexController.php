@@ -28,10 +28,10 @@ class IndexController extends Controller
         $user = DB::table('user_infos')
         ->join('artical_list','user_infos.uid','=','artical_list.user_id')
         ->select('user_infos.nickname','user_infos.photo','artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id')->get();
-         // $rtical_list = DB::table('artical_list')->get();
+         $rtical_list = DB::table('artical_list')->get();
          $artical_detail = DB::table('artical_detail')->get();
         
-        return view('home.index',compact('user','artical_detail','configs','links','subject','advert'));
+        return view('home.index',compact('user','artical_detail','configs','links','subject','advert','rtical_list'));
     }
 
     /**
