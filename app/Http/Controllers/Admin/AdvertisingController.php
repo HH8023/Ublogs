@@ -17,8 +17,6 @@ class AdvertisingController extends Controller
     public function index(Request $request)
     {
         // 显示广告首页
-       
-       
          $where = [];
         $ob = DB::table('advert');
          // dd($ob);
@@ -59,45 +57,34 @@ class AdvertisingController extends Controller
     public function store(Request $request)
     {
            
-              if($request->file('ad_image')){
-                $input=$request->except('_token');
-                  // dd($input);
-                //获取图片
-                $pic = $input['ad_image'];
-                  // dd($pic);
-                //文件的后缀名
-                $clientName = $pic -> getClientOriginalExtension();
-                  // dd($clientName);
-                //图片的存放的地址
-                $path = 'admin/img/';
-                //
-                $filename = time().rand(1000, 9999).".".$clientName;
-                $avatar = $path.$filename;
-                // dd($avatar);
-                $pic->move($path,$filename);
-                //添加数据库
-                $id = DB::table('advert')->insertGetId($input);
-              //如果有id说明添加成功
-             
-               if($id > 0){
-                    //跳转到admin/advert路由，携带一个闪存
-                return redirect('admin/advert')->with('msg','添加成功');
-                } 
-             } 
+        if($request->file('ad_image')){
+            $input=$request->except('_token');
+              // dd($input);
+            //获取图片
+            $pic = $input['ad_image'];
+              // dd($pic);
+            //文件的后缀名
+            $clientName = $pic -> getClientOriginalExtension();
+              // dd($clientName);
+            //图片的存放的地址
+            $path = 'admin/img/';
+            //
+            $filename = time().rand(1000, 9999).".".$clientName;
+            $avatar = $path.$filename;
+            // dd($avatar);
+            $pic->move($path,$filename);
+            //添加数据库
+            $id = DB::table('advert')->insertGetId($input);
+            //如果有id说明添加成功
+         
+           if($id > 0){
+                //跳转到admin/advert路由，携带一个闪存
+            return redirect('admin/advert')->with('msg','添加成功');
+            } 
+        } 
           
     }
 
-    /**
-     * Display the speecified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-      // echo 2222;
-        
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -122,36 +109,19 @@ class AdvertisingController extends Controller
      */
      public function update(Request $request, $id)
      {
-           
-
-
-         
-          //执行修改
-         
-              // echo 111111111;
-                // $input=$request->except('_token');
+        //执行修改
+        // echo 111111111;
+        // $input=$request->except('_token');
         $data = $request->except('_token','_method','query_string');
-          
-
-
-
         $res = DB::table('advert')->where('ad_id', $id)->update($data);
-
          // dd($res);
          if($res > 0){
-             return redirect('admin/advert')->with('msg', '修改成功');
-         }else{
-        return redirect('admin/advert')->with('msg', '修改失败(或者并未修改)');
-         }
-
-      
-
-          // 
-          // $data = $request->except('_token','_method','query_string');
-          
-      
+            return redirect('admin/advert')->with('msg', '修改成功');
+        }else{
+            return redirect('admin/advert')->with('msg', '修改失败(或者并未修改)');
+        }
      
-     }
+    }
 
      /**
       * Remove the specified resource from storage.
@@ -162,9 +132,7 @@ class AdvertisingController extends Controller
      public function destroy($id)
      {
           // 删除
-        
-         $re = DB::table('advert')->where('ad_id', $id)->delete();
-        
+        $re = DB::table('advert')->where('ad_id', $id)->delete();  
         if($re > 0){
             return redirect('admin/advert')->with('msg', '删除成功');
         }else{

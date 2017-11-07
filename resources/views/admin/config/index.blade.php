@@ -19,11 +19,11 @@
             @endif
 
             <div class="widget-body am-fr">
-                @foreach($configs as $v)
+                 @foreach($configs as $v)
                 <form class="am-form tpl-form-border-form tpl-form-border-br" action="{{ url('admin/config/'.$v->id) }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        
+                       
                     <div class="am-form-group">
                         <label for="user-name" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
                         <div class="am-u-sm-9">
@@ -74,48 +74,14 @@
                             <textarea name="conf_copyright" rows="3" placeholder="{{ $v->conf_copyright }}" required></textarea>
                         </div>
                     </div><br>
-
-                    <!-- <div class="am-form-group">
-                        <label for="status" class="am-u-sm-3 am-form-label">当前状态 <span id="doc-single-toggle-status" class="tpl-form-line-small-title">{{ $v->conf_status }}</span></label>
-                        <div class="am-u-sm-9">
-                            <div class="tpl-switch">
-                                <input type="checkbox" name="conf_status" class="ios-switch bigswitch tpl-switch-btn" checked=" 1|关闭,0|开启">
-                                <div class="tpl-switch-btn-view"><div></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <button id="doc-single-toggle" type="button" name="conf_status" class="am-btn am-btn-primary" data-am-button>网站开关</button>
-                        <p>网站状态：<span id="doc-single-toggle-status" class="am-text-danger">未激活</span></p>
-                        <script>
-                            $(function() {
-                                var $toggleButton = $('#doc-single-toggle');
-                                $toggleButton.on('click', function() {
-                                setButtonStatus();
-                            });
-                            function setButtonStatus() {
-                                var status = $toggleButton.hasClass('am-active') ? 'status off' : 'status on';
-                                $('#doc-single-toggle-status').text(status);
-                                }
-                            })
-                        </script>
-
-
-                    </div><br> -->
-
-                    @endforeach
+                    
                     <div class="am-form-group">
                         <div class="am-u-sm-9 am-u-sm-push-3">
                             <input type="submit" value="提交" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
                         </div>
                     </div>
-
-                    
-
-                    
-                    
                 </form><br><br>
+                @endforeach
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@
 <div class="col-xs-16 main">
     <div class="recommend-collection">
         @foreach($subject as $v)
-        <a class="collection" target="_blank" href=""><img src="{{ url('./upload/'.$v->photo) }}"><div class="name">{{ $v->name }}</div></a><!-- 栏目专栏 点击进入栏目列表 -->
+        <a class="collection" href="{{ url('/home/article/'.$v->id) }}"><img src="{{ url('./upload/'.$v->photo) }}"><div class="name">{{ $v->name }}</div></a><!-- 栏目专栏 点击进入栏目列表 -->
         @endforeach
     </div>
     <div class="split-line"></div>
@@ -34,16 +34,15 @@
         <ul class="note-list" infinite-scroll-url="/">
              
             <li id="note-18477749" data-note-id="18477749" class="have-img">
-                <a class="wrap-img" href="{{ url('/home/article/') }}"> 
-                   
-                    <img class="img-blur" src="">
+                <a class="wrap-img" href="{{ url('home/details/'.$art->art_id)}}"> 
+                   <img data-echo="{{ asset('/'.$us->photo) }}" class="img-blur" src="{{ asset('/'.$us->photo) }}" alt="120">
                 </a>                                            
                 <div class="content">
                      
                     <div class="author">
-                        <a class="avatar" href="/"><img src="{{ url('admin/assets/img/upload') }}"></a>   <!-- 头像 --><!-- 点击进入 作者主页 -->
+                        <a class="avatar" href="/"><img src="{{ asset('./upload/'.$us->u_photo) }}"></a>   <!-- 头像 --><!-- 点击进入 作者主页 -->
                         <div class="name">
-                            <a class="blue-link" target="_blank" href="">1</a>  <!-- 作者 --><!-- 点击进入 作者主页 -->
+                            <a class="blue-link" href="">{{ $us->nickname }}</a>  <!-- 作者 --><!-- 点击进入 作者主页 -->
                             <span class="time" data-shared-at="{{ $us->add_time }}"></span>
                         </div>
                     </div>
@@ -64,26 +63,30 @@
     </div>
 </div>
 <div class="col-xs-7 col-xs-offset-1 aside">
-    @foreach($advert as $v)
+    <!-- 首页右侧 App 下载提示 -->
+    <a class="col-xs-8 download" data-toggle="popover" data-placement="top" data-html="true" data-trigger="hover">
+        <div class="info">
+            @foreach($configs as $v)
+            <div class="title">网站公告<i class="iconfont ic-link"></i></div>
+            <div class="description">{{ $v->conf_content }}</div>
+            @endforeach
+        </div>
+    </a><br>
     <div class="board">
-        <a target="_blank" href="/recommendations/notes?category_id=56&amp;utm_medium=index-banner-s&amp;utm_source=desktop"><img src="{{ url('./image/'.$v->ad_image) }}"></a>
-               
+        @foreach($advert as $v)
+        <div class="note-title">{{ $v->ad_title }}</div>
+       <a target="_blank" href="/recommendations/notes?category_id=56&amp;utm_medium=index-banner-s&amp;utm_source=desktop"><img src="{{ url('./image/'.$v->ad_image) }}"></a>
+        @endforeach     
     </div>
-
     <!-- 首页右侧 广告 -->
     <!-- 广告 -->
     <div class="jianshu-daily">
         <div class="title">
-        广告区域
             <a target="_blank" href=""></a>
         </div>
         <a target="_blank" class="note" href="welcome.php">
-            <img src="{{ url('./image/'.$v->ad_image) }}" alt="96" />
-            <div class="note-title">{{ $v->ad_title }}</div>
         </a>                    
     </div>
-    @endforeach 
-
   <!-- 广告 -->
     <div data-vcomp="recommended-author-list"></div>
 </div>

@@ -33,7 +33,7 @@ class LoginController extends Controller
     		if ($req['apwd'] == $admin->apwd) {
     			session_start();
     			$request->session()->put('admin', $req['aname']);
-                return redirect('admin/index');
+                return redirect('admin/user');
     		} else {
     			return 1;
     		}

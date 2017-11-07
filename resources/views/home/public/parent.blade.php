@@ -82,7 +82,7 @@
 
     <!-- 右上角 -->
       <!-- 未登录显示登录/注册/写文章 -->
-        <a class="btn write-btn" target="_blank" href="{{ url('/home/login') }}">
+        <a class="btn write-btn" href="{{ url('/home/login') }}">
             <i class="iconfont ic-write">  
             </i>写文章</a>   
         <a class="btn sign-up" href="{{ url('/home/register') }}">注册</a>
@@ -107,16 +107,16 @@
                 <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
               </a>            
             </li>
-            <li class="">
+       <!--      <li class="">
               <a class="app-download-btn" href="#"><span class="menu-text">关注</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
             </li>
             <li class="">
               <a class="app-download-btn" href="#"><span class="menu-text">消息</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
-            </li>
+            </li> -->
           <li class="search" padding-left=130px;>
             <form action="{{ url('/home/search') }}" name="" accept-charset="UTF-8" method="get">
                 <input name="utf8" type="hidden" value="" />
-                <input type="text" name="keywords" id="q" value="" placeholder="搜索" class="search-input" />
+                <input type="text" name="keywords"  id="q" value="" placeholder="搜索文章" class="search-input" />
                 <a class="search-btn" ><i class=""></i></a>
             </form>          
           </li>
@@ -126,6 +126,7 @@
   </div>
 </nav>
     @else
+  
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="width-limit">
             <!-- 左上方 Logo -->
@@ -137,7 +138,7 @@
             <!-- 如果用户登录，显示下拉菜单 -->
             <div class="user">
                 <div data-hover="dropdown">
-                    <a class="avatar" href="{{ url('/home/user/') }}"><img src="{{ asset('home/picture/b52e96e4-2f5c-472f-906e-7a8b2b94d7ae.png') }}" alt="120"></a>
+                    <a class="avatar" href="{{ url('/home/user/') }}"><img src="{{ asset('./upload/'.$users->u_photo) }}" alt="120"></a>
                 </div>
                 <ul class="dropdown-menu">
                     <li><a href="{{ url('/home/user') }}">
@@ -177,9 +178,9 @@
                             <a href="{{ url('/home/index') }}"><span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i></a>
                         </li>
                         <li class="search">
-                            <form target="_blank" action="{{ url('/home/search') }}" name="" accept-charset="UTF-8" method="get">
+                            <form action="{{ url('/home/search') }}" name="" accept-charset="UTF-8" method="get">
                                 <input name="utf8" value="✓" type="hidden">
-                                <input name="keywords" id="q" placeholder="搜索" class="search-input" type="text">
+                                <input name="keywords"  id="q" placeholder="搜索" class="search-input" type="text">
                                 <a class="search-btn" ><i class="iconfont ic-search"></i></a>
                             </form>
                         </li>
@@ -188,6 +189,7 @@
             </div>
         </div>
     </nav>
+   
     @endif
 
 <div class="container index">
@@ -199,21 +201,21 @@
 <footer class="container">
     <div class="row">
     <div class="col-xs-17 main" style="margin: 0 auto;">
-      <a target="_blank" href="">关于Ublog</a><em> · </em><a target="_blank" href="">联系我们</a><em> · </em><a target="_blank" href="">加入我们</a><em> · </em><a target="_blank" href="">简书出版</a><em> · </em><a target="_blank" href="">品牌与徽标</a><em> · </em><a target="_blank" href="">帮助中心</a><em> · </em><a target="_blank" href="">合作伙伴</a>      
+      <a href="">关于Ublog</a><em> · </em><a href="">联系我们</a><em> · </em><a href="">加入我们</a><em> · </em><a href="">Ublog出版</a><em> · </em><a href="">品牌与徽标</a><em> · </em><a href="">帮助中心</a><em> · </em><a href="">合作伙伴</a>      
       <div class="icp">
-        ©2012-2017 Ublog信息科技有限公司 / Ublog / 京ICP备1101XXXX号-X /  <a target="_blank" href="" style="color:blue;"></a>
+        ©2012-2017 Ublog信息科技有限公司 / Ublog / 京ICP备1101XXXX号-X /  <a href="" style="color:blue;"></a>
       <div class="icp" >
         @foreach($configs as $v)
-          <a target="_blank" href="" style="color:blue;">友情链接:
+          <a href="" style="color:blue;">友情链接:
                     {{ $v->conf_copyright }}
                  </a><em> · </em>
         @endforeach
         <br>
-        <a target="_blank" href="">
+        <a href="">
           <img src="" alt="Smrz" />
         </a>        
-        <a target="_blank" href="#">沪公网安备31010402002252号 / </a>
-        <a target="_blank" href="http://www.Ublog.cn/">
+        <a href="#">沪公网安备31010402002252号 / </a>
+        <a href="http://www.Ublog.cn/">
           <img src="picture/wxb-a216456895eb66c17497dbd3da443cf8_1.png" alt="Wxb" />
         </a>        举报电话：021-34770013
       </div>

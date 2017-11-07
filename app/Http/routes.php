@@ -95,12 +95,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['isLogin']
 
 	// 前台个人中心--个人资料
 	Route::get('home/user','Home\UserController@index');
+	Route::post('home/douser/{uid}','Home\UserController@doUser');
 	//             --密码修改
-	Route::get('home/user/password','Home\UserController@doPwd');
+	// Route::get('home/user/password','Home\UserController@doPwd');
 	//             --我的文章
-	Route::get('home/user/article','Home\UserController@article');
+	// Route::get('home/user/article','Home\UserController@article');
 	//             --我的评论
-	Route::get('home/user/comment','Home\UserController@comment');
+	// Route::get('home/user/comment','Home\UserController@comment');
 
 	//前台列表页路由
 	Route::resource('home/article','Home\ArticleController');

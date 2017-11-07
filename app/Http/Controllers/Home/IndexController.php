@@ -21,17 +21,21 @@ class IndexController extends Controller
         $links = DB::table('links')->get();
         $subject = DB::table('subject')->get();
         $advert = DB::table('advert')->get();
-
+        // dd($subject);
         // session(['tel'=>'12345']);
         // $tel = session()->pull('tel');
         // dd($tel);
         $user = DB::table('user_infos')
         ->join('artical_list','user_infos.uid','=','artical_list.user_id')
-        ->select('user_infos.nickname','user_infos.photo','artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id')->get();
+        ->select('user_infos.nickname','user_infos.u_photo','artical_list.title','artical_list.add_time','artical_list.photo','artical_list.id')->get();
+        // dd($user);
          // $rtical_list = DB::table('artical_list')->get();
          $artical_detail = DB::table('artical_detail')->get();
-        
-        return view('home.index',compact('user','artical_detail','configs','links','subject','advert'));
+        $users =  session()->get('tel');
+        $uid = $users->uid;
+        $users = DB::table('user_infos')->where('uid',$uid)->first();
+        // dd($users);
+        return view('home.index',compact('users','user','artical_detail','configs','links','subject','advert'));
     }
 
     /**
@@ -62,7 +66,7 @@ class IndexController extends Controller
     public function article($id)
     {
         //
-        echo 3333;
+        // echo 3333111111;
     }
 
    

@@ -68,10 +68,12 @@ class LoginController extends Controller
             session()->pull('code');
             //执行添加并且得到id
             $id = DB::table('users')->insertGetId($data);
+            $data['uid'] = $id;
+            $id = DB::table('user_infos')->insertGetId($data);
             //如果有id说明添加成功
             if($id > 0){
                 //跳转到/types路由，携带一个闪存
-                return view('home/login')->with('msg','注册成功，请完善个人信息');
+                return redirect('home/login')->with('msg','注册成功，请登录');
             }
         }else{
             return redirect('home/login')->with('msg','用户已注册，请登录');
@@ -91,11 +93,17 @@ class LoginController extends Controller
             $pass = Crypt::decrypt($tel->password);
            // dd($data['password']);
             if ($data['password'] !== $pass) {
-                return redirect('home/login')->with('msg','密码不正确');
+                return redirect('home/login')->with('msg','密码不正确！');
             }
             session(['tel'=>$tel]);
-            return redirect('home/index');
+            $nickname = DB::table('user_infos')->where('tel', $data['tel'])->first();
+            // dd($nickname);
+            if($nickname->nickname != null){
+                return redirect('home/index');
+            }else{
+                return redirect('home/user')->with('msg','请完善个人信息！');
             // echo 124;
+            }
         }
     }
     // 重置密码页

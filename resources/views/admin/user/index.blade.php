@@ -52,7 +52,6 @@
                             <th>用户ID</th>
                             <th>昵称</th>
                             <th>电话</th>
-                            <th>密码</th>
                             <th>性别</th>
                             <th>头像</th>
                             <th>生日</th>
@@ -68,9 +67,8 @@
                                 <td>{{ $user->uid }}</td>
                                 <td>{{ $user->nickname }}</td>
                                 <td>{{ $user->tel }}</td>
-                                <td>{{ $user->password }}</td>
                                 <td>{{ ($user->sex==1)?'男':'女' }}</td>
-                                <td><img src="{{ asset('admin/assets/img/upload/'.$user->photo) }}" style="width: 60px;"></td>
+                                <td><img src="{{ asset('admin/assets/img/upload/'.$user->u_photo) }}" style="width: 60px;"></td>
                                 <td>{{ $user->birthday }}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">

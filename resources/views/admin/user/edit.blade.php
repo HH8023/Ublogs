@@ -39,14 +39,6 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="user-name" class="am-u-sm-3 am-form-label">密码 <span class="tpl-form-line-small-title">password</span></label>
-                    <div class="am-u-sm-9">
-                        <input type="text" class="tpl-form-input" disabled id="user-name" value="{{ $user->password }}" name="tel">
-                        <!-- <small>请填写标题文字10-20字左右。</small> -->
-                    </div>
-                </div>
-
-                <div class="am-form-group">
                     <label for="user-name" class="am-u-sm-3 am-form-label">电话 <span class="tpl-form-line-small-title">Tel</span></label>
                     <div class="am-u-sm-9">
                         <input type="text" class="tpl-form-input" disabled id="user-name" value="{{ $user->tel }}" name="password">
@@ -78,7 +70,7 @@
                     <div class="am-u-sm-9">
                         <div class="am-form-group am-form-file">
                             <div class="tpl-form-file-img">
-                                <img src="{{ asset('admin/assets/img/upload/'.$user->photo) }}" style="width: 60px;" disabled name="photo" >
+                                <img src="{{ asset('admin/assets/img/upload/'.$user->u_photo) }}" style="width: 60px;" disabled name="photo" >
                             </div>
                             <!-- <button type="button" class="am-btn am-btn-danger am-btn-sm">
                              <i class="am-icon-cloud-upload"></i> 添加头像</button>

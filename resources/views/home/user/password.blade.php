@@ -21,27 +21,28 @@
                     <div class="u-progress-bar-inner"></div>
                 </div>
             </div>
-            <form class="am-form am-form-horizontal">
+            <form class="am-form am-form-horizontal" method="post">
+                {{csrf_field()}}
                 <div class="am-form-group">
                     <label for="user-old-password" class="am-form-label">原密码</label>
                     <div class="am-form-content">
-                        <input type="password" id="user-old-password" placeholder="请输入原登录密码">
+                        <input type="password" id="user-old-password" name="oldpwd" placeholder="请输入原登录密码">
                     </div>
                 </div>
                 <div class="am-form-group">
                     <label for="user-new-password" class="am-form-label">新密码</label>
                     <div class="am-form-content">
-                        <input type="password" id="user-new-password" placeholder="由数字、字母组合">
+                        <input type="password" id="user-new-password" name="newpwd" placeholder="由数字、字母组合">
                     </div>
                 </div>
                 <div class="am-form-group">
                     <label for="user-confirm-password" class="am-form-label">确认密码</label>
                     <div class="am-form-content">
-                        <input type="password" id="user-confirm-password" placeholder="请再次输入上面的密码">
+                        <input type="password" id="user-confirm-password" name="repwd" placeholder="请再次输入上面的密码">
                     </div>
                 </div>
                 <div class="info-btn">
-                    <div class="am-btn am-btn-danger">保存修改</div>
+                    <input type="submit" class="am-btn am-btn-danger" value="保存修改">
                 </div>
 
             </form>
@@ -58,13 +59,13 @@
             <li class="person">
                 <ul>
                     <li><a href="{{ url('home/user') }}">个人中心</a></li>
-                    <li><a href="{{ url('home/user/password') }}">修改密码</a></li>
+                    <!-- <li><a href="{{ url('home/user/password') }}">修改密码</a></li> -->
                 </ul>
             </li>
             <li class="person">
                 <ul>
-                    <li><a href="{{ url('home/user/article') }}">我的文章</a></li>
-                    <li><a href="{{ url('home/user/comment') }}">我的评论</a></li>
+                    <!-- <li><a href="{{ url('home/user/article') }}">我的文章</a></li> -->
+                    <!-- <li><a href="{{ url('home/user/comment') }}">我的评论</a></li> -->
                 </ul>
             </li>
             <li class="person">
