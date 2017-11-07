@@ -27,6 +27,7 @@
     <div class="split-line"></div>
         <div id="list-container">
         <!-- 文章列表模块 -->
+        @foreach($rtical_list as $value)
         @foreach($user as $us)
         @foreach( $artical_detail as $art )
         @if( $us->id ==  $art->art_id )
@@ -46,7 +47,7 @@
                             <span class="time" data-shared-at="{{ $us->add_time }}"></span>
                         </div>
                     </div>
-                    <a class="title" href="{{ url('home/details/'.$art->art_id)}}">{{ $us->title }}</a>
+                    <a class="title" href="{{ url('home/details/'.$art->art_id)}}">{{ $value->title }}</a>
                     <p class="abstract">{{ $art->content }} </p>     
                     <div class="meta">
                         <!-- <a class="collection-tag" target="_blank"></a> -->
@@ -57,6 +58,7 @@
              
         </ul>
         @endif
+        @endforeach
         @endforeach
         @endforeach
         <!-- 文章列表模块完毕 -->
