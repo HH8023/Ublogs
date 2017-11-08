@@ -32,8 +32,10 @@ class IndexController extends Controller
          // $rtical_list = DB::table('artical_list')->get();
          $artical_detail = DB::table('artical_detail')->get();
         $users =  session()->get('tel');
-        $uid = $users->uid;
-        $users = DB::table('user_infos')->where('uid',$uid)->first();
+        if($users != null){
+	        $uid = $users->uid;
+	        $users = DB::table('user_infos')->where('uid',$uid)->first();
+        }
         // dd($users);
         return view('home.index',compact('users','user','artical_detail','configs','links','subject','advert'));
     }

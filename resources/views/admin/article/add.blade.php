@@ -34,16 +34,7 @@
                     </div>
                 </div>
 
-                <div class="am-form-group">
-                    <label for="user-phone" class="am-u-sm-12 am-form-label am-text-left">作者 <span class="tpl-form-line-small-title">Author</span></label>
-                    <div class="am-u-sm-12  am-margin-top-xs">
-                        <select  name="user_id" data-am-selected="{searchBox: 1}">
-                          <option value="1">-The.CC</option>
-                          <option value="2">夕风色</option>
-                          <option value="3">Orange</option>
-                        </select>
-                   </div>
-                </div>
+                <input type="hidden" name="user_id" class="am-form-field tpl-form-no-bg am-margin-top-xs" value="13" >
                  <div class="am-form-group">
                     <label for="user-phone" class="am-u-sm-12 am-form-label am-text-left">添加分类 <span class="tpl-form-line-small-title">add category</span></label>
                     <div class="am-u-sm-12  am-margin-top-xs">

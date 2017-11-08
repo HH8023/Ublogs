@@ -66,8 +66,9 @@
     <div class='medio-body'>
       栏　　目:<select class='form-control m-b-10' name="pro_id" id="" style="width:500px;height:30px;">
             <option value=''>--请选择--</option>
-            <option  value="1">IT</option>
-            <option  value="2">古典</option>
+            <option  value="3">IT</option>
+            <option  value="2">新鲜事物</option>
+            <option  value="4">古典</option>
         </select>
     </div><br><br>
     

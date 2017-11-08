@@ -41,7 +41,7 @@
                     <div class="am-form-group">
                         <label for="user-intro" class="am-u-sm-3 am-form-label">公告<span class="tpl-form-line-small-title">content</span></label>
                         <div class="am-u-sm-9">
-                            <textarea class="conf_content" rows="3" placeholder="{{ $v->conf_content }}" required></textarea>
+                            <textarea name="conf_content" rows="3" placeholder="{{ $v->conf_content }}" required></textarea>
                         </div>
                     </div>
                     <div class="am-form-group">

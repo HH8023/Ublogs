@@ -16,7 +16,7 @@
             <img src="{{ asset('admin/assets/img/upload/'.$b->photo) }}" alt="96" />
 </a>          <div class="info">
             <span class="name"><a href="/u/9ade34a08a3f">{{ $b->nickname}}</a></span>
-              <img class="badge-icon" data-toggle="tooltip" title="简书签约作者" src="{{ asset('home/picture/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png')}}" alt="Signed" />
+              <img class="badge-icon" data-toggle="tooltip" title="ublog签约作者" src="{{ asset('home/picture/signed-9702260821906f0d953eab67a29f8e7a2d2e3d20960576347591283a3fbfd867.png')}}" alt="Signed" />
               @endif
           @endforeach
             <!-- 关注用户按钮 -->
@@ -25,7 +25,7 @@
             <div class="meta">
               <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
                 <span class="publish-time">{{ $a -> add_time }}</span>
-              <span class="wordage">字数 2685</span>
+              
             </div>
           </div>
           <!-- 如果是当前作者，加入编辑按钮 -->

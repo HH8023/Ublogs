@@ -26,11 +26,15 @@ class ArticleController extends Controller
         //获取用户的信息
         $uid = UserInfo::get();
         // //用户关注表
-        // dd($art);
+        // dd($uid);
         // $att = Attentions::get();
-
-        // return view('home.details',['art' => $art,'det'=>$det,'uid' => $uid],compact('configs','links'));
-        return view('home.details',compact('configs','links','art','det','uid'));
+        $users =  session()->get('tel');
+        if($users != null){
+            $id = $users->uid;
+            $users = DB::table('user_infos')->where('uid',$id)->first();
+        }
+        // return view('home.details',['art' => $art,'det'=>$det,'configs'=>$configs,'links'=>$links,'users'=>$users],['uid'=>$uid]);
+        return view('home.details',compact('users','configs','links','art','det','uid'));
 
     }
     /**
@@ -43,9 +47,11 @@ class ArticleController extends Controller
     {   
         $configs = DB::table('configs')->get();
         $links = DB::table('links')->get();
-        $uid = session()->get('tel');
-        $uid = $uid->uid;
-        $users = DB::table('user_infos')->where('uid',$uid)->first();
+        $users =  session()->get('tel');
+        if($users != null){
+            $uid = $users->uid;
+            $users = DB::table('user_infos')->where('uid',$uid)->first();
+        }
          //查找栏目的id
         $pro = Subject::where('id',$id)->first();
         //从栏目的id绑定文章的id

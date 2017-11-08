@@ -54,7 +54,7 @@
                                     <th>ID</th>
                                     <th>文章缩略图</th>
                                     <th>文章标题</th>
-                                    <th>作者</th>
+                                    <!-- <th>作者</th> -->
                                     <th>时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -67,11 +67,11 @@
                                         <img src="{{ asset('/'.$a->photo) }}" class="tpl-table-line-img" alt="" > 
                                     </td>
                                     <td>{{ $a->title }}</td>
-                                    @foreach ($user as $b)
+                                    <!-- @foreach ($user as $b)
                                         @if($a->user_id == $b->uid)
                                     <td>{{ $b->nickname }}</td>
                                         @endif
-                                    @endforeach
+                                    @endforeach -->
                                     <td>{{ $a->add_time }}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
